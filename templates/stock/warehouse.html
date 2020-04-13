@@ -17,6 +17,19 @@
                     <th>操作</th>
 				</tr>
 			</thead>
+			{% if warehouses %}
+			{% for w in warehouses %}
+			<tr>
+				<th>{{ w.id }}</th>
+				<th>{{ w.name }}</th>
+				<th>{{ w.location }}</th>
+				<th>{{ w.description }}</th>
+				<th>操作</th>
+			</tr>
+			{% endfor %}			
+			{% else %}
+				<tr><th>There are no warehouses present.</th></tr>
+			{% endif %}
 			<tfoot>
 				<tr>
 					<th>ID</th>
