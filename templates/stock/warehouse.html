@@ -14,7 +14,17 @@
 					<th>仓库名称</th>
 					<th>位置</th>
 					<th>备注</th>
-                    <th>操作</th>
+          <th>
+            <div class="hidden-sm hidden-xs btn-group">
+    					<a class="btn btn-xs btn-info" href="{% url 'SaveWarehouse' w.id %}">
+    						<i class="ace-icon fa fa-pencil bigger-120"></i>
+    					</a>
+
+    					<a class="btn btn-xs btn-danger" href="{% url 'DeleteWarehouse' w.id %}">
+    						<i class="ace-icon fa fa-trash-o bigger-120"></i>
+    					</a>
+    				</div>
+          </th>
 				</tr>
 			</thead>
 			{% if warehouses %}
