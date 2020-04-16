@@ -1,5 +1,7 @@
 from django.contrib import admin
 
+from base.models import Wordbook
+
 
 @admin.register(Wordbook)
 class WordbookeAdmin(admin.ModelAdmin):
