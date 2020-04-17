@@ -1,8 +1,31 @@
 from django.shortcuts import render
+from django.views.generic import ListView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.urls import reverse_lazy
 
-from base.models import Wordbook
+from base.models import Wordbook, Category
 
 
+class CategoryList(ListView):
+    model = Category
+
+
+class CategoryCreate(CreateView):
+    model = Category
+    fields = ['name', 'description']
+
+
+class CategoryUpdate(UpdateView):
+    model = Category
+    fields = ['name', 'description']
+
+
+class CategoryDelete(DeleteView):
+    model = Category
+    success_url = reverse_lazy('categories')
+
+
+'''
 def show_wordbook(request):
     wordbooks = wordbook.objects.all()
     context_dict = {}
@@ -32,3 +55,4 @@ def add_wordbook(request):
     # Will handle the bad form, new form, or no form supplied cases.
     # Render the form with error messages (if any).
     return render(request, 'base/add_wordbook.html', {'form': form})
+'''

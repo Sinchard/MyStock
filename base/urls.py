@@ -1,10 +1,13 @@
 from django.urls import path
-from base import views
+from base.views import CategoryList, CategoryCreate, CategoryUpdate, CategoryDelete
 
 app_name = 'base'
 
 urlpatterns = [
-    #path('', views.index, name='index'),
-    path('', views.show_wordbook, name='wordbooks'),
-    path('add', views.add_wordbook, name='add_wordbook'),
+    path('categories', CategoryList.as_view(), name='categories'),
+    path('category/add', CategoryCreate.as_view(), name='add_category'),
+    path('category/<int:pk>/', CategoryUpdate.as_view(), name='edit_category'),
+    path('category/<int:pk>/delete',
+         CategoryDelete.as_view(),
+         name='delete_category'),
 ]

@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}
+分类列表
+{% endblock %}
+
+{% block breadcrumb %}
+<li id="orbit"><a href="{%url 'base:categories' %}">分类信息</a></li>
+{% endblock %}
+
+{% block maincontent %}
+<div id="data">
+	<table id='dataTable' class="table  table-bordered table-hover" cellspacing='0' width='100%'>
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>名称</th>
+				<th>备注</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		{% if object_list %}
+		{% for c in object_list %}
+		<tr>
+			<th>{{ c.id }}</th>
+			<th>{{ c.name }}</th>
+			<th>{{ c.description }}</th>
+			<th>
+				<div class="hidden-sm hidden-xs btn-group">
+					<a class="btn btn-xs btn-info" href="{% url 'base:edit_category' c.id %}">
+						<i class="ace-icon fa fa-pencil bigger-120"></i>
+					</a>
+
+					<a class="btn btn-xs btn-danger" href="{% url 'base:delete_category' c.id %}">
+						<i class="ace-icon fa fa-trash-o bigger-120"></i>
+					</a>
+				</div>
+			</th>
+		</tr>
+		{% endfor %}
+		{% else %}
+		<tr>
+			<th><strong>There are no categories present.</strong></th>
+		</tr>
+		{% endif %}
+		<tfoot>
+			<tr>
+				<th>ID</th>
+				<th>名称</th>
+				<th>备注</th>
+				<th>操作</th>
+			</tr>
+		</tfoot>
+	</table>
+</div>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript" src="/static/scripts/mainInit/warehouse.js"></script>
+{% endblock %}
