@@ -19,12 +19,11 @@ from django.conf.urls.static import static
 
 from config import settings
 
-from stock import views
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     #path('', views.index, name = 'index'),
     path('stock/', include('stock.urls')),
     path('base/', include('base.urls')),
     path('property/', include('property.urls')),
+    path('user/', include('user.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

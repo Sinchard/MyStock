@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'stock',
     'base',
     'property',
+    'user',
 ]
 
 MIDDLEWARE = [
