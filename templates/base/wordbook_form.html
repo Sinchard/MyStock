@@ -1,22 +1,15 @@
 {% extends 'base.html' %}
 
-{% title %}
+{% block title %}
 库房详情
 {% endblock %}
 
 {% block breadcrumb %}
-<li id="warehouse"><a href="/stocks/warehouse.html">库房信息</a></li>
-<li id="detail">
-    {% if new %}
-    新增库房
-    {% else %}
-    修改库房信息
-    {% endif %}
-</li>
+<li id="orbit"><a href="{%url 'base:wordbooks' %}">字典列表</a></li>
 {% endblock %}
 
 {% block maincontent %}
-<form id="warehouseForm" class="form-horizontal container" method="post" action="/stock/add">
+<form id="warehouseForm" class="form-horizontal container" method="post" action="#">
     {% csrf_token %}
     {% for hidden in form.hidden_fields %}
     {{ hidden }}
@@ -41,7 +34,7 @@
                     <div class="form-group col-md-6">
                         {% endif %}
                         <label for="{{ form.name.id_for_label }}"
-                            class="col-sm-4 control-label"><strong>库房名称：</strong></label>
+                            class="col-sm-4 control-label"><strong>名称：</strong></label>
                         <div class="col-sm-8">
                             {{ form.name }}
                         </div>
@@ -59,14 +52,34 @@
                         {% else %}
                         <div class="form-group col-md-6">
                             {% endif %}
-                            <label for="{{ form.location.id_for_label }}"
-                                class="col-sm-4 control-label"><strong>库房位置：</strong></label>
+                            <label for="{{ form.parent.id_for_label }}"
+                                class="col-sm-4 control-label"><strong>父节点：</strong></label>
                             <div class="col-sm-8">
-                                {{ form.location }}
+                                {{ form.parent }}
                             </div>
-                            {% if form.location.errors %}
+                            {% if form.parent.errors %}
                             <ul style="list-style-type:none">
-                                {% for error in form.location.errors %}
+                                {% for error in form.parent.errors %}
+                                <li align="center" class="text-warning"><strong>{{ error }}</strong></li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    {% if form.categories.errors %}
+                    <div class="form-group col-md-6 has-warning">
+                        {% else %}
+                        <div class="form-group col-md-6">
+                            {% endif %}
+                            <label for="{{ form.categories.id_for_label }}"
+                                class="col-sm-4 control-label"><strong>所属分类：</strong></label>
+                            <div class="col-sm-8">
+                                {{ form.categories }}
+                            </div>
+                            {% if form.categories.errors %}
+                            <ul style="list-style-type:none">
+                                {% for error in form.categories.errors %}
                                 <li align="center" class="text-warning"><strong>{{ error }}</strong></li>
                                 {% endfor %}
                             </ul>
