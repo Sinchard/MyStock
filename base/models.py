@@ -46,10 +46,8 @@ class Wordbook(CommonInfo):
     def get_type_display(self):
         return self.name
 
-    def dict(self):
-        d = {'id': self.id, 'name': self.name}
-        d.update(super(DeviceType, self).dict())
-        return d
+    def get_absolute_url(self):
+        return reverse('base:edit_wordbook', args=[str(self.id)])
 
     class Meta:
         verbose_name = u'字典表'
