@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %}
+用户信息
+{% endblock %}
+
+{% block breadcrumb %}
+<li id="orbit"><a href="{%url 'user:profiles' %}">用户列表</a></li>
+{% endblock %}
+
+{% block maincontent %}
+<div id="data">
+	<table id='dataTable' class='table table-bordered table-hover' cellspacing='0' width='100%'>
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>姓名</th>
+				<th>部门</th>
+				<th>分组</th>
+				<th>邮箱</th>
+				<th>电话</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		{% if object_list %}
+		{% for u in object_list %}
+		<tr>
+			<th>{{ u.id }}</th>
+			<th>{{ u.name }}</th>
+			<th>{{ u.department.name }}</th>
+			<th>{{ u.team.name }}</th>
+			<th>{{ u.user.email }}</th>
+			<th>{{ u.telephone }}</th>
+			<th>
+				<div class="hidden-sm hidden-xs btn-group">
+					<a class="btn btn-xs btn-info" href="{% url 'user:edit_profile' u.id %}">
+						<i class="ace-icon fa fa-pencil bigger-120"></i>
+					</a>
+
+					<a class="btn btn-xs btn-danger" href="{% url 'user:delete_profile' u.id %}">
+						<i class="ace-icon fa fa-trash-o bigger-120"></i>
+					</a>
+				</div>
+			</th>
+		</tr>
+		{% endfor %}
+		{% else %}
+		<tr>
+			<th colspan="7"><strong>There are no users present.</strong></th>
+		</tr>
+		{% endif %}
+		<tfoot>
+			<tr>
+				<th>ID</th>
+				<th>姓名</th>
+				<th>部门</th>
+				<th>分组</th>
+				<th>邮箱</th>
+				<th>电话</th>
+				<th>操作</th>
+			</tr>
+		</tfoot>
+	</table>
+</div>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript" src="/static/scripts/mainInit/warehouse.js"></script>
+{% endblock %}
