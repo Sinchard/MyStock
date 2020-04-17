@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.urls import reverse
 from stock.models import CommonInfo
 
 
@@ -14,6 +14,9 @@ class Category(CommonInfo):
 
     def get_type_display(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('base:edit_category', args=[str(self.id)])
 
     class Meta:
         verbose_name = u'类型表'
