@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block breadcrumb %}
+<li id="orbit"><a href="{%url 'property:devices' %}">设备列表</a></li>
+{% endblock %}
+
+{% block maincontent %}
+<div id="data">
+    <table id='dataTable' class='table table-bordered table-hover' cellspacing='0' width='100%'>
+        <thead>
+            <tr>
+                <th>设备ID</th>
+                <th>类型</th>
+                <th>名称/型号/序列号</th>
+                <th>资产编码</th>
+                <th>SAP编码</th>
+                <!--<th>状态</th>-->
+                <!--<th>审核</th>-->
+                <th>创建时间</th>
+                <th>备注</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        {% if object_list %}
+        {% for d in object_list %}
+        <tr>
+            <th>{{ d.id }}</th>
+            <th>{{ d.classification.name }}</th>
+            <th>{{ d.get_device_display }}</th>
+            <th>{{c.asset}}</th>
+            <th>{{c.sap}}</th>
+            <th>{{ d.modify_date }}</th>
+            <th>{{ d.description }}</th>
+            <th>
+                <div class="hidden-sm hidden-xs btn-group">
+                    <a class="btn btn-xs btn-info" href="{% url 'property:edit_device' d.id %}">
+                        <i class="ace-icon fa fa-pencil bigger-120"></i>
+                    </a>
+
+                    <a class="btn btn-xs btn-danger" href="{% url 'property:delete_device' d.id %}">
+                        <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                    </a>
+                </div>
+            </th>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <th><strong>There are no devices present.</strong></th>
+        </tr>
+        {% endif %}
+        <tfoot>
+            <tr>
+                <th>设备ID</th>
+                <th>类型</th>
+                <th>名称/型号/序列号</th>
+                <th>资产编码</th>
+                <th>SAP编码</th>
+                <!--<th>状态</th>-->
+                <!--<th>审核</th>-->
+                <th>创建时间</th>
+                <th>备注</th>
+                <th>操作</th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript" src="/static/scripts/mainInit/device.js"></script>
+{% endblock %}
