@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block maincontent %}
-<div id="data">
+<div id="data" class="col-md-10 col-md-offset-1">
     <table id='dataTable' class='table table-bordered table-hover' cellspacing='0' width='100%'>
         <thead>
             <tr>
@@ -22,19 +22,19 @@
         {% for m in object_list %}
         <tr>
             <th>{{ m.id }}</th>
-            <th>{{ m.brand.name }}</th>
+            <th>{{ m.name.name }}</th>
             <th>{{ m.classification.name }}</th>
-            <th>{{m.account}}</th>
-            <th>{{m.warehouse.name}}</th>
-            <th>{{ d.description }}</th>
+            <th>{{ m.amount }}</th>
+            <th>{{ m.warehouse.name }}</th>
+            <th>{{ m.description }}</th>
             <th>
                 <div class="hidden-sm hidden-xs btn-group">
-                    <a class="btn btn-xs btn-info" href="{% url 'property:edit_material' d.id %}">
+                    <a class="btn btn-xs btn-info" href="{% url 'property:edit_material' m.id %}">
                         <i class="ace-icon fa fa-pencil bigger-120"></i>
                     </a>
 
-                    <a class="btn btn-xs btn-danger" href="{% url 'property:delete_material' d.id %}">
-                        <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                    <a class="btn btn-xs btn-danger" href="{% url 'property:delete_material' m.id %}">
+                        <i class="ace-icon fa fa-trash-o bimgger-120"></i>
                     </a>
                 </div>
             </th>
