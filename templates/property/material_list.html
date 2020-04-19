@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block breadcrumb %}
+<li id="orbit"><a href="{%url 'property:materials' %}">设备列表</a></li>
+{% endblock %}
+
+{% block maincontent %}
+<div id="data">
+    <table id='dataTable' class='table table-bordered table-hover' cellspacing='0' width='100%'>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>名称</th>
+                <th>所属分类</th>
+                <th>数量</th>
+                <th>库房</th>
+                <th>备注</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        {% if object_list %}
+        {% for m in object_list %}
+        <tr>
+            <th>{{ m.id }}</th>
+            <th>{{ m.brand.name }}</th>
+            <th>{{ m.classification.name }}</th>
+            <th>{{m.account}}</th>
+            <th>{{m.warehouse.name}}</th>
+            <th>{{ d.description }}</th>
+            <th>
+                <div class="hidden-sm hidden-xs btn-group">
+                    <a class="btn btn-xs btn-info" href="{% url 'property:edit_material' d.id %}">
+                        <i class="ace-icon fa fa-pencil bigger-120"></i>
+                    </a>
+
+                    <a class="btn btn-xs btn-danger" href="{% url 'property:delete_material' d.id %}">
+                        <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                    </a>
+                </div>
+            </th>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <th><strong>There are no materials present.</strong></th>
+        </tr>
+        {% endif %}
+        <tfoot>
+            <tr>
+                <th>ID</th>
+                <th>名称</th>
+                <th>所属分类</th>
+                <th>数量</th>
+                <th>库房</th>
+                <th>备注</th>
+                <th>操作</th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript" src="/static/scripts/mainInit/material.js"></script>
+{% endblock %}
