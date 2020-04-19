@@ -42,4 +42,4 @@ class MaterialUpdate(UpdateView):
 
 class MaterialDelete(DeleteView):
     model = Material
-    success_url = reverse_lazy('property:Materials')
+    success_url = reverse_lazy('property:materials')
