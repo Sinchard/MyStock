@@ -1,7 +1,6 @@
 from django.db import models
 
-from base.models import CommonInfo, Wordbook
-from stock.models import Warehouse
+from base.models import CommonInfo, Wordbook, Warehouse
 
 
 class Device(CommonInfo):
