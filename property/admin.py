@@ -18,7 +18,7 @@ class DeviceAdmin(admin.ModelAdmin):
 
 @admin.register(Material)
 class MaterialAdmin(admin.ModelAdmin):
-    list_display = ('id', 'brand', 'classification', 'account', 'warehouse', 'create_date', 'modify_date',
+    list_display = ('id', 'name', 'classification', 'amount', 'warehouse', 'create_date', 'modify_date',
                     'description', 'attach')
     # 文章列表里显示想要显示的字段
     list_per_page = 50
