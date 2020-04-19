@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 
-from property.models import Device, Material
+from asset.models import Device, Material
 
 
 class DeviceForm(ModelForm):

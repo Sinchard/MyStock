@@ -68,7 +68,7 @@ class Device(CommonInfo):
         return d
 
     def get_absolute_url(self):
-        return reverse('property:edit_device', args=[str(self.id)])
+        return reverse('asset:edit_device', args=[str(self.id)])
 
     class Meta:
         verbose_name = '设备表'
@@ -86,7 +86,7 @@ class Material(CommonInfo):
                                   blank=True, null=True, verbose_name="所在库房")
 
     def get_absolute_url(self):
-        return reverse('property:edit_material', args=[str(self.id)])
+        return reverse('asset:edit_material', args=[str(self.id)])
 
     class Meta:
         verbose_name = '材料表'

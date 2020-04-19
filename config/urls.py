@@ -24,6 +24,6 @@ urlpatterns = [
     #path('', views.index, name = 'index'),
     path('stock/', include('stock.urls')),
     path('base/', include('base.urls')),
-    path('property/', include('property.urls')),
+    path('asset/', include('asset.urls')),
     path('user/', include('user.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

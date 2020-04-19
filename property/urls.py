@@ -1,8 +1,8 @@
 from django.urls import path
-from property.views import DeviceList, DeviceCreate, DeviceUpdate, DeviceDelete
-from property.views import MaterialList, MaterialCreate, MaterialUpdate, MaterialDelete
+from asset.views import DeviceList, DeviceCreate, DeviceUpdate, DeviceDelete
+from asset.views import MaterialList, MaterialCreate, MaterialUpdate, MaterialDelete
 
-app_name = 'property'
+app_name = 'asset'
 
 urlpatterns = [
     path('devices', DeviceList.as_view(), name='devices'),

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block breadcrumb %}
-<li id="orbit"><a href="{%url 'property:materials' %}">设备列表</a></li>
+<li id="orbit"><a href="{%url 'asset:materials' %}">设备列表</a></li>
 {% endblock %}
 
 {% block maincontent %}
@@ -29,11 +29,11 @@
             <th>{{ m.description }}</th>
             <th>
                 <div class="hidden-sm hidden-xs btn-group">
-                    <a class="btn btn-xs btn-info" href="{% url 'property:edit_material' m.id %}">
+                    <a class="btn btn-xs btn-info" href="{% url 'asset:edit_material' m.id %}">
                         <i class="ace-icon fa fa-pencil bigger-120"></i>
                     </a>
 
-                    <a class="btn btn-xs btn-danger" href="{% url 'property:delete_material' m.id %}">
+                    <a class="btn btn-xs btn-danger" href="{% url 'asset:delete_material' m.id %}">
                         <i class="ace-icon fa fa-trash-o bimgger-120"></i>
                     </a>
                 </div>
