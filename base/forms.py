@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 
-from base.models import Category, Wordbook
+from basic.models import Category, Wordbook
 
 
 class CategoryForm(ModelForm):

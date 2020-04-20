@@ -1,5 +1,5 @@
 from django.urls import path
-from base.views import CategoryList, CategoryCreate, CategoryUpdate, CategoryDelete
+from basic.views import CategoryList, CategoryCreate, CategoryUpdate, CategoryDelete
 
 from user.views import UserProfileList, UserProfileCreate, UserProfileUpdate, UserProfileDelete
 

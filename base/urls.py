@@ -1,8 +1,8 @@
 from django.urls import path
-from base.views import CategoryList, CategoryCreate, CategoryUpdate, CategoryDelete
-from base.views import WordbookList, WordbookCreate, WordbookUpdate, WordbookDelete
+from basic.views import CategoryList, CategoryCreate, CategoryUpdate, CategoryDelete
+from basic.views import WordbookList, WordbookCreate, WordbookUpdate, WordbookDelete
 
-app_name = 'base'
+app_name = 'basic'
 
 urlpatterns = [
     path('categories', CategoryList.as_view(), name='categories'),

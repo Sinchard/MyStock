@@ -1,24 +1,55 @@
 from django.db import models
 
-from base.models import CommonInfo, Warehouse
+from basic.models import CommonInfo, Warehouse
 from asset.models import Device, Material
 from user.models import UserProfile
 
 
 class StockIn(CommonInfo):
-    device = models.ForeignKey(Device, on_delete=models.SET_NULL, blank=True, null=True,)
-    material = models.ForeignKey(Material, on_delete=models.SET_NULL, blank=True, null=True,)
-    warehouse = models.ForeignKey(Warehouse, on_delete=models.SET_NULL, blank=True, null=True,)
-    employee = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, blank=True, null=True,)
+    device = models.ForeignKey(
+        Device,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+    )
+    material = models.ForeignKey(
+        Material,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+    )
+    warehouse = models.ForeignKey(
+        Warehouse,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+    )
+    employee = models.ForeignKey(
+        UserProfile,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+    )
 
     def __unicode__(self):
         return self.device.sn + ' ' + self.employee.name
 
     def records(self):
-        d = {'id': self.id,
-             'deviceId': self.device.id, 'device': self.device.name.name + ' ' + self.device.model.name + ' ' + self.device.sn,
-             'op': 'IN', 'employee': self.employee.name,
-             'location': self.warehouse.name}
+        d = {
+            'id':
+            self.id,
+            'deviceId':
+            self.device.id,
+            'device':
+            self.device.name.name + ' ' + self.device.model.name + ' ' +
+            self.device.sn,
+            'op':
+            'IN',
+            'employee':
+            self.employee.name,
+            'location':
+            self.warehouse.name
+        }
         d.update(super(StockIn, self).dict())
         return d
 
@@ -41,10 +72,23 @@ class StockIn(CommonInfo):
             return ''
 
     def dict(self):
-        d = {'id': self.id,
-             'device': self.device.name.name + '/' + self.device.model.name + '/' + self.device.sn, 'deviceId': self.device.id,
-             'warehouse': self.warehouse.name, 'warehouseId': self.warehouse.id,
-             'employee': self.employee.name, 'employeeId': self.employee.id}
+        d = {
+            'id':
+            self.id,
+            'device':
+            self.device.name.name + '/' + self.device.model.name + '/' +
+            self.device.sn,
+            'deviceId':
+            self.device.id,
+            'warehouse':
+            self.warehouse.name,
+            'warehouseId':
+            self.warehouse.id,
+            'employee':
+            self.employee.name,
+            'employeeId':
+            self.employee.id
+        }
         d.update(super(StockIn, self).dict())
         return d
 

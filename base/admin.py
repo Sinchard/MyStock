@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from base.models import Category, Wordbook, CategoryShip
+from basic.models import Category, Wordbook, CategoryShip
 
 
 @admin.register(Category)

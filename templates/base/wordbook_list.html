@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block breadcrumb %}
-<li id="orbit"><a href="{%url 'base:wordbooks' %}">字典列表</a></li>
+<li id="orbit"><a href="{%url 'basic:wordbooks' %}">字典列表</a></li>
 {% endblock %}
 
 {% block maincontent %}
@@ -35,11 +35,11 @@
 			<th>{{ w.description }}</th>
 			<th>
 				<div class="hidden-sm hidden-xs btn-group">
-					<a class="btn btn-xs btn-info" href="{% url 'base:edit_wordbook' w.id %}">
+					<a class="btn btn-xs btn-info" href="{% url 'basic:edit_wordbook' w.id %}">
 						<i class="ace-icon fa fa-pencil bigger-120"></i>
 					</a>
 
-					<a class="btn btn-xs btn-danger" href="{% url 'base:delete_wordbook' w.id %}">
+					<a class="btn btn-xs btn-danger" href="{% url 'basic:delete_wordbook' w.id %}">
 						<i class="ace-icon fa fa-trash-o bigger-120"></i>
 					</a>
 				</div>
