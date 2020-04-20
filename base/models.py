@@ -40,6 +40,10 @@ class CommonInfo(models.Model):
     def created(self):
         return time2str(self.create_date)
 
+    @property
+    def modified(self):
+        return time2str(self.modify_date)
+
     def get_create_date_display(self):
         return time2str(self.create_date)
 
@@ -62,7 +66,7 @@ class Category(CommonInfo):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('base:edit_category', args=[str(self.id)])
+        return reverse('basic:edit_category', args=[str(self.id)])
 
     class Meta:
         verbose_name = u'类型表'
@@ -93,7 +97,7 @@ class Wordbook(CommonInfo):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('base:edit_wordbook', args=[str(self.id)])
+        return reverse('basic:edit_wordbook', args=[str(self.id)])
 
     class Meta:
         verbose_name = u'字典表'
