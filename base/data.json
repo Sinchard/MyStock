@@ -1,47 +1,47 @@
 [{
-        "model": "base.Category",
+        "model": "basic.Category",
         "fields": {
             "name": "设备",
             "description": "资产分类"
         }
     },
     {
-        "model": "base.Category",
+        "model": "basic.Category",
         "fields": {
             "name": "材料",
             "description": "资产分类"
         }
     },
     {
-        "model": "base.Category",
+        "model": "basic.Category",
         "fields": {
             "name": "仪器仪表",
             "description": "资产分类"
         }
     },
     {
-        "model": "base.Category",
+        "model": "basic.Category",
         "fields": {
             "name": "品牌型号",
             "description": "资产属性"
         }
     },
     {
-        "model": "base.Category",
+        "model": "basic.Category",
         "fields": {
             "name": "部门",
             "description": "人员信息"
         }
     },
     {
-        "model": "base.Category",
+        "model": "basic.Category",
         "fields": {
             "name": "班组",
             "description": "人员信息"
         }
     },
     {
-        "model": "base.Wordbook",
+        "model": "basic.Wordbook",
         "fields": {
             "name": "班组",
             "description": "人员信息"
