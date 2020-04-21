@@ -73,22 +73,12 @@ class Category(CommonInfo):
         verbose_name_plural = u'类型表'
 
 
+# 用来存出重复的内容，例如各种分类、品牌型号、部门班组
 class Wordbook(CommonInfo):
     name = models.CharField(max_length=30,
                             unique=True,
                             verbose_name=u"名称",
                             db_index=True)
-    parent = models.ForeignKey("self",
-                               null=True,
-                               blank=True,
-                               verbose_name=u"上一级",
-                               on_delete=models.SET_NULL)
-    categories = models.ManyToManyField(
-        Category,
-        through='CategoryShip',
-        through_fields=('wordbook', 'category'),
-        verbose_name=u"分类",
-    )
 
     def __str__(self):
         return self.name
@@ -104,13 +94,14 @@ class Wordbook(CommonInfo):
         verbose_name_plural = u'字典表'
 
 
-class CategoryShip(CommonInfo):
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    wordbook = models.ForeignKey(Wordbook, on_delete=models.CASCADE)
+# 建立多对多映射关系，例如某个品牌可以同时存在于设备、材料等分类中
+class WordbookShip(models.Model):
+    item = models.ForeignKey(Wordbook, null=True, blank=True, verbose_name="词典条目", on_delete=models.CASCADE, related_name="items")
+    parent = models.ForeignKey(Wordbook, null=True, blank=True, verbose_name="父节点", on_delete=models.SET_NULL, related_name="parents")
 
     class Meta:
-        verbose_name = u'分类字典映射表'
-        verbose_name_plural = u'分类字典映射表'
+        verbose_name = '字典关系映射表'
+        verbose_name_plural = '字典关系映射表'
 
 
 class Warehouse(CommonInfo):
