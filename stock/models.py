@@ -76,7 +76,7 @@ class MaterialIn(CommonInfo):
     )
 
     def __str__(self):
-        return self.material.name + ' ' + self.employee.name
+        return self.material.name.name + ' ' + self.employee.name
 
     def get_warehouse_display(self):
         if self.warehouse:
