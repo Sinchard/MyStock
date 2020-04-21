@@ -1,22 +1,15 @@
 {% extends 'base.html' %}
 
-{% title %}
+{% block title %}
 库房详情
 {% endblock %}
 
 {% block breadcrumb %}
-<li id="warehouse"><a href="/stocks/warehouse.html">库房信息</a></li>
-<li id="detail">
-    {% if new %}
-    新增库房
-    {% else %}
-    修改库房信息
-    {% endif %}
-</li>
+<li id="warehouse"><a href="{%url 'basic:warehouses' %}">库房信息</a></li>
 {% endblock %}
 
 {% block maincontent %}
-<form id="warehouseForm" class="form-horizontal container" method="post" action="/stock/add">
+<form id="warehouseForm" class="form-horizontal container" method="post" action="#">
     {% csrf_token %}
     {% for hidden in form.hidden_fields %}
     {{ hidden }}
