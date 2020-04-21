@@ -5,7 +5,7 @@ from asset.models import Device, Material
 from user.models import UserProfile
 
 
-class StockIn(CommonInfo):
+class DeviceIn(CommonInfo):
     device = models.ForeignKey(
         Device,
         on_delete=models.SET_NULL,
@@ -31,27 +31,8 @@ class StockIn(CommonInfo):
         null=True,
     )
 
-    def __unicode__(self):
+    def __str__(self):
         return self.device.sn + ' ' + self.employee.name
-
-    def records(self):
-        d = {
-            'id':
-            self.id,
-            'deviceId':
-            self.device.id,
-            'device':
-            self.device.name.name + ' ' + self.device.model.name + ' ' +
-            self.device.sn,
-            'op':
-            'IN',
-            'employee':
-            self.employee.name,
-            'location':
-            self.warehouse.name
-        }
-        d.update(super(StockIn, self).dict())
-        return d
 
     def get_device_display(self):
         if self.device:
@@ -71,30 +52,53 @@ class StockIn(CommonInfo):
         else:
             return ''
 
-    def dict(self):
-        d = {
-            'id':
-            self.id,
-            'device':
-            self.device.name.name + '/' + self.device.model.name + '/' +
-            self.device.sn,
-            'deviceId':
-            self.device.id,
-            'warehouse':
-            self.warehouse.name,
-            'warehouseId':
-            self.warehouse.id,
-            'employee':
-            self.employee.name,
-            'employeeId':
-            self.employee.id
-        }
-        d.update(super(StockIn, self).dict())
-        return d
+    class Meta:
+        verbose_name = '设备入库表'
+        verbose_name_plural = '设备入库表'
+
+
+class MaterialIn(CommonInfo):
+    material = models.ForeignKey(
+        Material,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+    )
+    amount = models.DecimalField(default=0,
+                                 max_digits=10,
+                                 decimal_places=2,
+                                 verbose_name="数量")
+    warehouse = models.ForeignKey(
+        Warehouse,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+    )
+    employee = models.ForeignKey(
+        UserProfile,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+    )
+
+    def __str__(self):
+        return self.material.name + ' ' + self.employee.name
+
+    def get_warehouse_display(self):
+        if self.warehouse:
+            return self.warehouse.name
+        else:
+            return ''
+
+    def get_employee_display(self):
+        if self.employee:
+            return self.employee.name
+        else:
+            return ''
 
     class Meta:
-        verbose_name = u'入库表'
-        verbose_name_plural = u'入库表'
+        verbose_name = '材料入库表'
+        verbose_name_plural = '材料入库表'
 
 
 '''
