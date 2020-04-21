@@ -16,6 +16,7 @@ class DeviceInAdmin(admin.ModelAdmin):
     # 设置哪些字段可以点击进入编辑界面
 
 
+@admin.register(MaterialIn)
 class MaterialInAdmin(admin.ModelAdmin):
     list_display = ('id', 'material', 'amount', 'warehouse', 'employee', 'check', 'create_date',
                     'modify_date', 'description', 'attach')
