@@ -1,6 +1,7 @@
 from django.urls import path
 from basic.views import CategoryList, CategoryCreate, CategoryUpdate, CategoryDelete
 from basic.views import WordbookList, WordbookCreate, WordbookUpdate, WordbookDelete
+from basic.views import WarehouseList, WarehouseCreate, WarehouseUpdate, WarehouseDelete
 
 app_name = 'basic'
 
@@ -17,4 +18,10 @@ urlpatterns = [
     path('wordbook/<int:pk>/delete',
          WordbookDelete.as_view(),
          name='delete_wordbook'),
+    path('warehouses', WarehouseList.as_view(), name='warehouses'),
+    path('warehouse/add', WarehouseCreate.as_view(), name='add_warehouse'),
+    path('warehouse/<int:pk>/', WarehouseUpdate.as_view(), name='edit_warehouse'),
+    path('warehouse/<int:pk>/delete',
+         WarehouseDelete.as_view(),
+         name='delete_warehouse'),
 ]
