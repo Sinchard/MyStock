@@ -12,12 +12,6 @@ class DeviceIn(CommonInfo):
         blank=True,
         null=True,
     )
-    material = models.ForeignKey(
-        Material,
-        on_delete=models.SET_NULL,
-        blank=True,
-        null=True,
-    )
     warehouse = models.ForeignKey(
         Warehouse,
         on_delete=models.SET_NULL,
