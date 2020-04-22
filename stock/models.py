@@ -25,6 +25,9 @@ class DeviceIn(CommonInfo):
         null=True,
     )
 
+    def get_absolute_url():
+        return reverse('stock:edit_devicein', args=[str(self.id)])
+
     def __str__(self):
         return self.device.sn + ' ' + self.employee.name
 
