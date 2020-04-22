@@ -3,21 +3,18 @@ import datetime
 from django import forms
 from django.forms import TextInput, Textarea, Select
 
-from stock.models import Warehouse
+from stock.models import DeviceIn, MaterialIn
 
 
-class WarehouseForm(forms.ModelForm):
-    id = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
-    description = forms.CharField(widget=forms.Textarea(attrs={
-        'class': 'form-control',
-        'rows': '2'
-    }),
-                                  required=False)
-
+class DeviceInForm(forms.ModelForm):
+    
     class Meta:
-        model = Warehouse
-        fields = ('id', 'name', 'location', 'description')
-        widgets = {
-            'name': TextInput(attrs={'class': 'form-control'}),
-            'location': TextInput(attrs={'class': 'form-control'}),
-        }
+        model = DeviceIn
+        fields = ['employee', 'warehouse', 'description']
+        #exclude = ['device','check', 'create_date', 'modify_date']
+    
+
+class MaterialInForm(forms.ModelForm):
+    class Meta:
+        model = MaterialIn
+        exclude = ['check', 'create_date', 'modify_date']
