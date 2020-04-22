@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}
+字典列表
+{% endblock %}
+
+{% block breadcrumb %}
+<li id="orbit"><a href="{%url 'basic:wordbooks' %}">字典列表</a></li>
+{% endblock %}
+
+{% block maincontent %}
+<div id="data" class="col-md-10 col-md-offset-1">
+	<table id='dataTable' class='table table-bordered table-hover' cellspacing='0' width='100%'>
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>名称</th>
+				<th>父节点</th>
+				<th>所属分类</th>
+				<th>备注</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		{% if object_list %}
+		{% for w in object_list %}
+		<tr>
+			<th>{{ w.id }}</th>
+			<th>{{ w.name }}</th>
+			<th>{{ w.parent.name }}</th>
+			<th>
+				{% for c in w.categories.all %}
+				{{c.name}},
+				{% endfor %}
+			</th>
+			<th>{{ w.description }}</th>
+			<th>
+				<div class="hidden-sm hidden-xs btn-group">
+					<a class="btn btn-xs btn-info" href="{% url 'basic:edit_wordbook' w.id %}">
+						<i class="ace-icon fa fa-pencil bigger-120"></i>
+					</a>
+
+					<a class="btn btn-xs btn-danger" href="{% url 'basic:delete_wordbook' w.id %}">
+						<i class="ace-icon fa fa-trash-o bigger-120"></i>
+					</a>
+				</div>
+			</th>
+		</tr>
+		{% endfor %}
+		{% else %}
+		<tr>
+			<th><strong>There are no warehouses present.</strong></th>
+		</tr>
+		{% endif %}
+		<tfoot>
+			<tr>
+				<th>ID</th>
+				<th>名称</th>
+				<th>父节点</th>
+				<th>所属分类</th>
+				<th>备注</th>
+				<th>操作</th>
+			</tr>
+		</tfoot>
+	</table>
+</div>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript" src="/static/scripts/mainInit/warehouse.js"></script>
+{% endblock %}

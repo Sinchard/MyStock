@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% load myfilters %}
+
+{% block title %}
+库房详情
+{% endblock %}
+
+{% block breadcrumb %}
+<li id="orbit"><a href="{%url 'stock:deviceins' %}">设备入库列表</a></li>
+{% endblock %}
+
+{% block maincontent %}
+<form id="warehouseForm" class="form-horizontal container" method="post" action="#">
+    {% csrf_token %}
+
+    {% for field in deviceForm %}
+    <div class="fieldWrapper form-group">
+        {{ field.errors }}
+        {{ field.label_tag|addclass:'col-sm-2 control-label' }}
+        <div class="col-sm-10">{{ field|addclass:'form-control' }}</div>
+        {% if field.help_text %}
+        <p class="help">{{ field.help_text|safe }}</p>
+        {% endif %}
+    </div>
+    {% endfor %}
+
+    {% for field in form %}
+    <div class="fieldWrapper">
+        {{ field.errors }}
+        {{ field.label_tag }} {{ field }}
+        {% if field.help_text %}
+        <p class="help">{{ field.help_text|safe }}</p>
+        {% endif %}
+    </div>
+    {% endfor %}
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-11">
+            <button id="oper" type="submit" class="btn btn-primary">确认</button>
+            <button type="button" class="btn btn-default">取消</button>
+        </div>
+    </div>
+    {% if alert == 'T' %}
+    <div id="alert" class="alert alert-dismissable alert-success">库房信息添加成功！</div>
+    {% elif alert == 'F' %}
+    <div id="alert" class="alert alert-dismissable alert-warning">添加失败，稍后请重试</div>
+    {% else %}
+    <div id="alert"></div>
+    {% endif %}
+</form>
+</div>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript" src="/static/scripts/mainInit/warehouse.js"></script>
+{% endblock %}
