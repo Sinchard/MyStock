@@ -47,14 +47,16 @@
                     </ul>
                     {% endif %}
                 </div>
+            </div>
 
+            <div class="row">
                 {% if form.brand.errors %}
                 <div class="form-group col-md-6 has-warning">
                     {% else %}
                     <div class="form-group col-md-6">
                         {% endif %}
                         <label for="{{ form.brand.id_for_label }}"
-                            class="col-sm-3 control-label"><strong>名称：</strong></label>
+                            class="col-sm-3 control-label"><strong>品牌：</strong></label>
                         <div class="col-sm-8 input-group">
                             {{ form.brand }}
                             <span class="input-group-btn">
@@ -72,9 +74,7 @@
                         </ul>
                         {% endif %}
                     </div>
-                </div>
 
-                <div class="row">
                     {% if form.model.errors %}
                     <div class="form-group col-md-6 has-warning">
                         {% else %}
@@ -99,7 +99,9 @@
                             </ul>
                             {% endif %}
                         </div>
+                    </div>
 
+                    <div class="row">
                         {% if form.sn.errors %}
                         <div class="form-group col-md-6 has-warning">
                             {% else %}
@@ -121,39 +123,41 @@
                         </div>
 
                         <div class="row">
-                            {% if form.good.errors %}
+                            {% if form.asset.errors %}
                             <div class="form-group col-md-6 has-warning">
                                 {% else %}
                                 <div class="form-group col-md-6">
                                     {% endif %}
-                                    <label for="{{ form.good.id_for_label }}"
-                                        class="col-sm-3 control-label">设备状态：</label>
+                                    <label for="{{ form.asset.id_for_label }}"
+                                        class="col-sm-3 control-label">资产编码：</label>
                                     <div class="col-sm-8">
-                                        {{ form.good }}
+                                        {{ form.asset }}
                                     </div>
-                                    {% if form.good.errors %}
+                                    {% if form.asset.errors %}
                                     <ul style="list-style-type:none">
-                                        {% for error in form.good.errors %}
-                                        <li align="center" class="text-warning"><strong>{{ error }}</strong></li>
+                                        {% for error in form.asset.errors %}
+                                        <li align="center" class="text-warning"><strong>{{ error }}</strong>
+                                        </li>
                                         {% endfor %}
                                     </ul>
                                     {% endif %}
                                 </div>
 
-                                {% if form.value.errors %}
+                                {% if form.sap.errors %}
                                 <div class="form-group col-md-6 has-warning">
                                     {% else %}
                                     <div class="form-group col-md-6">
                                         {% endif %}
-                                        <label for="{{ form.value.id_for_label }}"
-                                            class="col-sm-3 control-label">价格：</label>
+                                        <label for="{{ form.sap.id_for_label }}"
+                                            class="col-sm-3 control-label">SAP号码：</label>
                                         <div class="col-sm-8">
-                                            {{ form.value }}
+                                            {{ form.sap }}
                                         </div>
-                                        {% if form.value.errors %}
+                                        {% if form.sap.errors %}
                                         <ul style="list-style-type:none">
-                                            {% for error in form.value.errors %}
-                                            <li align="center" class="text-warning"><strong>{{ error }}</strong></li>
+                                            {% for error in form.sap.errors %}
+                                            <li align="center" class="text-warning"><strong>{{ error }}</strong>
+                                            </li>
                                             {% endfor %}
                                         </ul>
                                         {% endif %}
@@ -161,19 +165,19 @@
                                 </div>
 
                                 <div class="row">
-                                    {% if form.asset.errors %}
+                                    {% if form.good.errors %}
                                     <div class="form-group col-md-6 has-warning">
                                         {% else %}
                                         <div class="form-group col-md-6">
                                             {% endif %}
-                                            <label for="{{ form.asset.id_for_label }}"
-                                                class="col-sm-3 control-label">资产编码：</label>
+                                            <label for="{{ form.good.id_for_label }}"
+                                                class="col-sm-3 control-label">设备状态：</label>
                                             <div class="col-sm-8">
-                                                {{ form.asset }}
+                                                {{ form.good }}
                                             </div>
-                                            {% if form.asset.errors %}
+                                            {% if form.good.errors %}
                                             <ul style="list-style-type:none">
-                                                {% for error in form.asset.errors %}
+                                                {% for error in form.good.errors %}
                                                 <li align="center" class="text-warning"><strong>{{ error }}</strong>
                                                 </li>
                                                 {% endfor %}
@@ -181,19 +185,19 @@
                                             {% endif %}
                                         </div>
 
-                                        {% if form.sap.errors %}
+                                        {% if form.value.errors %}
                                         <div class="form-group col-md-6 has-warning">
                                             {% else %}
                                             <div class="form-group col-md-6">
                                                 {% endif %}
-                                                <label for="{{ form.sap.id_for_label }}"
-                                                    class="col-sm-3 control-label">SAP号码：</label>
+                                                <label for="{{ form.value.id_for_label }}"
+                                                    class="col-sm-3 control-label">价格：</label>
                                                 <div class="col-sm-8">
-                                                    {{ form.sap }}
+                                                    {{ form.value }}
                                                 </div>
-                                                {% if form.sap.errors %}
+                                                {% if form.value.errors %}
                                                 <ul style="list-style-type:none">
-                                                    {% for error in form.sap.errors %}
+                                                    {% for error in form.value.errors %}
                                                     <li align="center" class="text-warning"><strong>{{ error }}</strong>
                                                     </li>
                                                     {% endfor %}
@@ -204,9 +208,9 @@
 
                                         <div class="row">
                                             {% if form.description.errors %}
-                                            <div class="form-group col-md-6 has-warning">
+                                            <div class="form-group has-warning">
                                                 {% else %}
-                                                <div class="form-group col-md-6">
+                                                <div class="form-group ">
                                                     {% endif %}
                                                     <label for="{{ form.description.id_for_label }}"
                                                         class="col-sm-3 control-label">备注：</label>
