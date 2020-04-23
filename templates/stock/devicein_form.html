@@ -15,10 +15,9 @@
     {% csrf_token %}
 
     {% for field in deviceForm %}
-    <div class="fieldWrapper form-group">
+    <div class="fieldWrapper">
         {{ field.errors }}
-        {{ field.label_tag|addclass:'col-sm-2 control-label' }}
-        <div class="col-sm-10">{{ field|addclass:'form-control' }}</div>
+        {{ field.label_tag }}{{ field }}
         {% if field.help_text %}
         <p class="help">{{ field.help_text|safe }}</p>
         {% endif %}

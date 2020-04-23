@@ -14,32 +14,28 @@
 		<thead>
 			<tr>
 				<th>ID</th>
-				<th>名称</th>
-				<th>父节点</th>
-				<th>所属分类</th>
+				<th>名称/型号/序列号</th>
+				<th>入库人</th>
+				<th>所在库房</th>
 				<th>备注</th>
 				<th>操作</th>
 			</tr>
 		</thead>
 		{% if object_list %}
-		{% for w in object_list %}
+		{% for d in object_list %}
 		<tr>
-			<th>{{ w.id }}</th>
-			<th>{{ w.name }}</th>
-			<th>{{ w.parent.name }}</th>
-			<th>
-				{% for c in w.categories.all %}
-				{{c.name}},
-				{% endfor %}
-			</th>
-			<th>{{ w.description }}</th>
+			<th>{{ d.id }}</th>
+			<th>{{ d.device.get_device_display }}</th>
+			<th>{{ d.employee }}</th>
+			<th>{{ d.warehouse }}</th>
+			<th>{{ d.description }}</th>
 			<th>
 				<div class="hidden-sm hidden-xs btn-group">
-					<a class="btn btn-xs btn-info" href="{% url 'basic:edit_wordbook' w.id %}">
+					<a class="btn btn-xs btn-info" href="{% url 'asset:edit_device' d.id %}">
 						<i class="ace-icon fa fa-pencil bigger-120"></i>
 					</a>
 
-					<a class="btn btn-xs btn-danger" href="{% url 'basic:delete_wordbook' w.id %}">
+					<a class="btn btn-xs btn-danger" href="{% url 'asset:delete_device' d.id %}">
 						<i class="ace-icon fa fa-trash-o bigger-120"></i>
 					</a>
 				</div>
@@ -48,15 +44,15 @@
 		{% endfor %}
 		{% else %}
 		<tr>
-			<th><strong>There are no warehouses present.</strong></th>
+			<th><strong>There are no devices present.</strong></th>
 		</tr>
 		{% endif %}
 		<tfoot>
 			<tr>
 				<th>ID</th>
-				<th>名称</th>
-				<th>父节点</th>
-				<th>所属分类</th>
+				<th>名称/型号/序列号</th>
+				<th>入库人</th>
+				<th>所在库房</th>
 				<th>备注</th>
 				<th>操作</th>
 			</tr>
