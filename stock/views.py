@@ -4,8 +4,8 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.urls import reverse_lazy
 
 from asset.forms import DeviceForm
-from stock.models import DeviceIn, MaterialIn
-from stock.forms import DeviceInForm, MaterialInForm
+from stock.models import DeviceIn, MaterialIn, Application, ApplicationDetail
+from stock.forms import DeviceInForm, MaterialInForm, ApplicationForm, ApplicationDetailForm
 
 
 class DeviceInList(ListView):
@@ -43,6 +43,28 @@ class DeviceInUpdate(UpdateView):
     model = DeviceIn
     form_class = DeviceInForm
 
+    def get_context_data(self, **kwargs):
+        context = super(DeviceInCreate, self).get_context_data(**kwargs)
+        #处理数据库记录对应的表单
+        if self.request.method == 'POST':
+            deviceForm = DeviceForm(self.request.POST, prefix='deviceForm')
+        else:
+            deviceForm = DeviceForm(prefix='deviceForm')
+        #注意要把自己处理的表单放到context上下文中，供模板文件使用
+        context['deviceForm'] = deviceForm
+        return context
+
+    def form_valid(self, form):
+	    #DeviceIn不能保存，因为对应的device还未保存，所以commit传为False
+        devicein = form.save(commit=False)
+		#获取上面get_context_data方法中在POST里得到的表单
+        context = self.get_context_data()		
+        device = context['deviceForm'].save()
+        devicein.device=device
+        devicein.save()
+        
+        return super(DeviceInCreate, self).form_valid(form)
+
 
 class DeviceInDelete(DeleteView):
     model = DeviceIn
@@ -66,5 +88,76 @@ class MaterialInUpdate(UpdateView):
 class MaterialInDelete(DeleteView):
     model = MaterialIn
     success_url = reverse_lazy('stock:materialins')
+
+
+class ApplicationList(ListView):
+    model = Application
+
+
+class ApplicationCreate(CreateView):
+    model = Application
+    form_class = ApplicationForm
+
+    def get_context_data(self, **kwargs):
+        context = super(ApplicationCreate, self).get_context_data(**kwargs)
+        #处理数据库记录对应的表单
+        if self.request.method == 'POST':
+            for i in range(10):
+                details = ApplicationDetailForm(self.request.POST, prefix='deviceForm'+str(i))
+        else:
+            for i in range(10):
+                details = ApplicationDetailForm(prefix='deviceForm'+str(i))
+        #注意要把自己处理的表单放到context上下文中，供模板文件使用
+        for i in i in range(10):
+            context['detailForm'+str(i)] = details[i]
+        return context
+
+    def form_valid(self, form):
+	    #保存Application
+        application = form.save()
+		#获取上面get_context_data方法中在POST里得到的表单
+        context = self.get_context_data()
+        for i in range(10):	
+            detail = context['deviceForm' + str(i)].save(commit=False)
+            detail.application = application
+            detail.save()
+                
+        return super(ApplicationCreate, self).form_valid(form)
+
+
+class ApplicationUpdate(UpdateView):
+    model = Application
+    form_class = ApplicationForm
+
+    def get_context_data(self, **kwargs):
+        context = super(ApplicationCreate, self).get_context_data(**kwargs)
+        #处理数据库记录对应的表单
+        if self.request.method == 'POST':
+            for i in range(10):
+                details = ApplicationDetailForm(self.request.POST, prefix='deviceForm'+str(i))
+        else:
+            for i in range(10):
+                details = ApplicationDetailForm(prefix='deviceForm'+str(i))
+        #注意要把自己处理的表单放到context上下文中，供模板文件使用
+        for i in i in range(10):
+            context['detailForm'+str(i)] = details[i]
+        return context
+
+    def form_valid(self, form):
+	    #保存Application
+        application = form.save()
+		#获取上面get_context_data方法中在POST里得到的表单
+        context = self.get_context_data()
+        for i in range(10):	
+            detail = context['deviceForm' + str(i)].save(commit=False)
+            detail.application = application
+            detail.save()
+                
+        return super(ApplicationCreate, self).form_valid(form)
+
+
+class ApplicationDelete(DeleteView):
+    model = Application
+    success_url = reverse_lazy('stock:Applications')
 
 
