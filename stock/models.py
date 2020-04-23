@@ -106,15 +106,15 @@ class Application(CommonInfo):
         (3, u'已出库'),
         (4, u'已确认'),
     )
-    name = models.CharField(max_length=50, null=True, db_index=True)
+    name = models.CharField(max_length=50, blank=True,null=True, db_index=True)
     applicant = models.ForeignKey(UserProfile, on_delete=models.SET_NULL,blank=True,null=True,related_name='applicants')
     status = models.IntegerField(default=1, choices=status_choice)
     approver = models.ManyToManyField(UserProfile)
-    approve_content = models.CharField(max_length=50, null=True)
-    approve_date = models.DateTimeField(null=True)
+    approve_content = models.CharField(max_length=50, blank=True,null=True,)
+    approve_date = models.DateTimeField(blank=True,null=True,)
     confirmed = models.ForeignKey(UserProfile, on_delete=models.SET_NULL,blank=True,null=True, related_name='confirmeds')
-    confirm_content = models.CharField(max_length=50, null=True)
-    confirm_date = models.DateTimeField(null=True)
+    confirm_content = models.CharField(max_length=50, blank=True,null=True,)
+    confirm_date = models.DateTimeField(blank=True,null=True,)
 
     def __str__(self):
         return self.name
@@ -152,9 +152,9 @@ class Application(CommonInfo):
 
 class ApplicationDetail(CommonInfo):
     application = models.ForeignKey(Application, on_delete=models.CASCADE,blank=True,null=True, related_name='details')
-    name = models.CharField(max_length=50, null=True, db_index=True)
-    number = models.IntegerField(null=True)
-    location = models.CharField(max_length=50, null=True)
+    name = models.CharField(max_length=50, blank=True,null=True, db_index=True)
+    number = models.IntegerField(blank=True,null=True,)
+    location = models.CharField(max_length=50, blank=True,null=True,)
     is_device = models.BooleanField(default=True)
     devices = models.ManyToManyField(Device)
 
