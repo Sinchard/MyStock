@@ -101,14 +101,15 @@ class ApplicationCreate(CreateView):
     def get_context_data(self, **kwargs):
         context = super(ApplicationCreate, self).get_context_data(**kwargs)
         #处理数据库记录对应的表单
+        details={}
         if self.request.method == 'POST':
             for i in range(10):
-                details = ApplicationDetailForm(self.request.POST, prefix='deviceForm'+str(i))
+                details[i] = ApplicationDetailForm(self.request.POST, prefix='detailForm'+str(i))
         else:
             for i in range(10):
-                details = ApplicationDetailForm(prefix='deviceForm'+str(i))
+                details[i] = ApplicationDetailForm(prefix='detailForm'+str(i))
         #注意要把自己处理的表单放到context上下文中，供模板文件使用
-        for i in i in range(10):
+        for i in range(10):
             context['detailForm'+str(i)] = details[i]
         return context
 
@@ -118,7 +119,7 @@ class ApplicationCreate(CreateView):
 		#获取上面get_context_data方法中在POST里得到的表单
         context = self.get_context_data()
         for i in range(10):	
-            detail = context['deviceForm' + str(i)].save(commit=False)
+            detail = context['detailForm' + str(i)].save(commit=False)
             detail.application = application
             detail.save()
                 
@@ -130,16 +131,17 @@ class ApplicationUpdate(UpdateView):
     form_class = ApplicationForm
 
     def get_context_data(self, **kwargs):
-        context = super(ApplicationCreate, self).get_context_data(**kwargs)
+        context = super(ApplicationUpdate, self).get_context_data(**kwargs)
         #处理数据库记录对应的表单
+        details={}
         if self.request.method == 'POST':
             for i in range(10):
-                details = ApplicationDetailForm(self.request.POST, prefix='deviceForm'+str(i))
+                details[i] = ApplicationDetailForm(self.request.POST, prefix='detailForm'+str(i))
         else:
             for i in range(10):
-                details = ApplicationDetailForm(prefix='deviceForm'+str(i))
+                details[i] = ApplicationDetailForm(prefix='detailForm'+str(i))
         #注意要把自己处理的表单放到context上下文中，供模板文件使用
-        for i in i in range(10):
+        for i in range(10):
             context['detailForm'+str(i)] = details[i]
         return context
 
@@ -149,11 +151,11 @@ class ApplicationUpdate(UpdateView):
 		#获取上面get_context_data方法中在POST里得到的表单
         context = self.get_context_data()
         for i in range(10):	
-            detail = context['deviceForm' + str(i)].save(commit=False)
+            detail = context['detailForm' + str(i)].save(commit=False)
             detail.application = application
             detail.save()
                 
-        return super(ApplicationCreate, self).form_valid(form)
+        return super(ApplicationUpdate, self).form_valid(form)
 
 
 class ApplicationDelete(DeleteView):
