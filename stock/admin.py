@@ -31,7 +31,7 @@ class MaterialInAdmin(admin.ModelAdmin):
 
 @admin.register(Application)
 class ApplicationAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'applicant', 'status', 'approver', 'approve_content', 'approve_date',
+    list_display = ('id', 'name', 'applicant', 'status', 'approve_content', 'approve_date',
                     'confirmed','confirm_content','confirm_date', 'description', 'attach')
     # 文章列表里显示想要显示的字段
     list_per_page = 50
