@@ -98,7 +98,7 @@ class MaterialIn(CommonInfo):
         verbose_name_plural = '材料入库表'
 
 
-'''
+
 class Application(CommonInfo):
     status_choice = (
         (1, u'已提交'),
@@ -107,16 +107,16 @@ class Application(CommonInfo):
         (4, u'已确认'),
     )
     name = models.CharField(max_length=50, null=True, db_index=True)
-    employee = models.ForeignKey(UserProfile, on_delete=models.SET_NULL,blank=True,null=True, null=True)
+    applicant = models.ForeignKey(UserProfile, on_delete=models.SET_NULL,blank=True,null=True,related_name='applicants')
     status = models.IntegerField(default=1, choices=status_choice)
-    approve = models.ManyToManyField(Employee, related_name='approves_set', null=True)
+    approver = models.ManyToManyField(UserProfile)
     approve_content = models.CharField(max_length=50, null=True)
     approve_date = models.DateTimeField(null=True)
-    confirm = models.ForeignKey(UserProfile, on_delete=models.SET_NULL,blank=True,null=True, related_name='confirm_set', null=True)
+    confirmed = models.ForeignKey(UserProfile, on_delete=models.SET_NULL,blank=True,null=True, related_name='confirmeds')
     confirm_content = models.CharField(max_length=50, null=True)
     confirm_date = models.DateTimeField(null=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     def get_employee_display(self):
@@ -151,22 +151,24 @@ class Application(CommonInfo):
 
 
 class ApplicationDetail(CommonInfo):
-    device = models.CharField(max_length=50, null=True, db_index=True)
+    application = models.ForeignKey(Application, on_delete=models.CASCADE,blank=True,null=True, related_name='details')
+    name = models.CharField(max_length=50, null=True, db_index=True)
     number = models.IntegerField(null=True)
     location = models.CharField(max_length=50, null=True)
     is_device = models.BooleanField(default=True)
+    devices = models.ManyToManyField(Device)
 
-    def __unicode__(self):
-        # return self.device+'-'+str(self.number)+'-'+self.location
+    def __str__(self):
+        # return self.name+'-'+str(self.number)+'-'+self.location
         return self.get_display()
 
     def get_display(self):
-        return u'{0}/{1}/{2}'.format(self.device, self.number, self.location)
+        return u'{0}/{1}/{2}'.format(self.name, self.number, self.location)
 
     def dict(self):
         d = {'id': self.id,
              'application': self.application.name, 'applicationId': self.application.id,
-             'device': self.device, 'number': self.number,
+             'name': self.name, 'number': self.number,
              'location': self.location}
         d.update(super(ApplicationDetail, self).dict())
         return d
@@ -175,7 +177,7 @@ class ApplicationDetail(CommonInfo):
         verbose_name = u'申请详情表'
         verbose_name_plural = u'申请详情表'
 
-
+'''
 # device manager is the employee who's role = 4
 class StockOut(CommonInfo):
     device = models.ForeignKey(Device, null=True)
