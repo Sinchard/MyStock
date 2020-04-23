@@ -23,11 +23,11 @@ class MaterialInForm(forms.ModelForm):
 
 class ApplicationForm(forms.ModelForm):
     class Meta:
-        module = Application
+        model = Application
         fields = ['id', 'name', 'applicant', 'status', 'approver', 'approve_content', 'approve_date',
                     'confirmed', 'confirm_content', 'confirm_date', 'description']
                     
 class ApplicationDetailForm(forms.ModelForm):
     class Meta:
-        module = ApplicationDetail
+        model = ApplicationDetail
         fields = ['name', 'number', 'location', 'is_device']                    
