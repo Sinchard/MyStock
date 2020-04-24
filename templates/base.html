@@ -13,64 +13,43 @@
 
     <link rel="shortcut icon" href="{% static 'image/fa.png' %}" />
 
-    <title>库存管理系统 --
+    <title>
         {% block title %}
         一个小型的基于Django和Bootstrap的库存管理系统
-        {% endblock %}
+        {% endblock %} -- 库存管理系统
     </title>
 
     <meta name="keywords" content="库存管理,Bootstrap" />
-    <meta name="description" content="使用bootstrap前端技术开发的库存管理系统" />
+    <meta name="description" content="使用django+bootstrap技术开发的库存管理系统" />
     <!-- basic styles -->
-    <link href="{% static 'css/bootstrap.min.css'%}" rel="stylesheet" />
-    <link href="{% static 'css/font-awesome.min.css'%}" rel="stylesheet" />
+    {% include "css.html "%}
 </head>
 
-<body>
+<body class="no-skin">
     <!-- Static navbar -->
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a href="/main.html" class="navbar-brand">
-                    <small><i class="icon-leaf"></i> {{ appname }}</small>
+    <nav id="navbar" class="navbar navbar-default ace-save-state">
+        <div class="navbar-container ace-save-state" id="navbar-container">
+            <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
+                <span class="sr-only">Toggle sidebar</span>
+
+                <span class="icon-bar"></span>
+
+                <span class="icon-bar"></span>
+
+                <span class="icon-bar"></span>
+            </button>
+
+            <div class="navbar-header pull-left">
+                <a href="index.html" class="navbar-brand">
+                    <small>
+                        <i class="fa fa-leaf"></i>
+                        库存管理系统
+                    </small>
                 </a>
             </div>
 
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a href="#" id="lifecycle" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                            aria-haspopup="true" aria-expanded="false">
-                            <i class="icon-hospital"></i><span class="menu-text"> 库存管理系统 </span>
-                            <b class="arrow icon-angle-down"></b>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li id="mssPage">
-                                <a href="/stocks/orbit.html"><i class="icon-double-angle-right"></i> 动中通卫星通讯 </a>
-                            </li>
-                            <li id="macrowavePage">
-                                <a href="/stocks/macrowave.html"><i class="icon-double-angle-right"></i> 微波通讯系统 </a>
-                            </li>
-                            <li id="instrumentPage">
-                                <a href="/stocks/device.html?typeId=21"><i class="icon-double-angle-right"></i> 仪器仪表
-                                </a>
-                            </li>
-                            <li role="presentation" class="divider"></li>
-                            <li id="statisticsPage">
-                                <a href="/stocks/statistic.html"><i class="icon-double-angle-right"></i> 数据统计 </a>
-                            </li>
-                            <li id="subunitPage">
-                                <a href="/stocks/subunit.html"><i class="icon-double-angle-right"></i> 设备组件 </a>
-                            </li>
-                        </ul>
-                    </li>
                     <li class="dropdown">
                         <a href="#" id="basicInfo" class="dropdown-toggle" data-toggle="dropdown" role="button"
                             aria-haspopup="true" aria-expanded="false">
@@ -140,27 +119,343 @@
                     </li>
                 </ul>
 
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="../navbar/">Default</a></li>
-                    <li><a href="../navbar-static-top/">Static top</a></li>
-                    <li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li>
-                </ul>
+                <div class="navbar-buttons navbar-header pull-right" role="navigation">
+                    <ul class="nav ace-nav">
+                        <li class="grey dropdown-modal">
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                <i class="ace-icon fa fa-tasks"></i>
+                                <span class="badge badge-grey">4</span>
+                            </a>
+
+                            <ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
+                                <li class="dropdown-header">
+                                    <i class="ace-icon fa fa-check"></i>
+                                    4 Tasks to complete
+                                </li>
+
+                                <li class="dropdown-content">
+                                    <ul class="dropdown-menu dropdown-navbar">
+                                        <li>
+                                            <a href="#">
+                                                <div class="clearfix">
+                                                    <span class="pull-left">Software Update</span>
+                                                    <span class="pull-right">65%</span>
+                                                </div>
+
+                                                <div class="progress progress-mini">
+                                                    <div style="width:65%" class="progress-bar"></div>
+                                                </div>
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="#">
+                                                <div class="clearfix">
+                                                    <span class="pull-left">Hardware Upgrade</span>
+                                                    <span class="pull-right">35%</span>
+                                                </div>
+
+                                                <div class="progress progress-mini">
+                                                    <div style="width:35%" class="progress-bar progress-bar-danger">
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="#">
+                                                <div class="clearfix">
+                                                    <span class="pull-left">Unit Testing</span>
+                                                    <span class="pull-right">15%</span>
+                                                </div>
+
+                                                <div class="progress progress-mini">
+                                                    <div style="width:15%" class="progress-bar progress-bar-warning">
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="#">
+                                                <div class="clearfix">
+                                                    <span class="pull-left">Bug Fixes</span>
+                                                    <span class="pull-right">90%</span>
+                                                </div>
+
+                                                <div class="progress progress-mini progress-striped active">
+                                                    <div style="width:90%" class="progress-bar progress-bar-success">
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li class="dropdown-footer">
+                                    <a href="#">
+                                        See tasks with details
+                                        <i class="ace-icon fa fa-arrow-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="purple dropdown-modal">
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                <i class="ace-icon fa fa-bell icon-animated-bell"></i>
+                                <span class="badge badge-important">8</span>
+                            </a>
+
+                            <ul
+                                class="dropdown-menu-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
+                                <li class="dropdown-header">
+                                    <i class="ace-icon fa fa-exclamation-triangle"></i>
+                                    8 Notifications
+                                </li>
+
+                                <li class="dropdown-content">
+                                    <ul class="dropdown-menu dropdown-navbar navbar-pink">
+                                        <li>
+                                            <a href="#">
+                                                <div class="clearfix">
+                                                    <span class="pull-left">
+                                                        <i class="btn btn-xs no-hover btn-pink fa fa-comment"></i>
+                                                        New Comments
+                                                    </span>
+                                                    <span class="pull-right badge badge-info">+12</span>
+                                                </div>
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="#">
+                                                <i class="btn btn-xs btn-primary fa fa-user"></i>
+                                                Bob just signed up as an editor ...
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="#">
+                                                <div class="clearfix">
+                                                    <span class="pull-left">
+                                                        <i
+                                                            class="btn btn-xs no-hover btn-success fa fa-shopping-cart"></i>
+                                                        New Orders
+                                                    </span>
+                                                    <span class="pull-right badge badge-success">+8</span>
+                                                </div>
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="#">
+                                                <div class="clearfix">
+                                                    <span class="pull-left">
+                                                        <i class="btn btn-xs no-hover btn-info fa fa-twitter"></i>
+                                                        Followers
+                                                    </span>
+                                                    <span class="pull-right badge badge-info">+11</span>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li class="dropdown-footer">
+                                    <a href="#">
+                                        See all notifications
+                                        <i class="ace-icon fa fa-arrow-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="green dropdown-modal">
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                <i class="ace-icon fa fa-envelope icon-animated-vertical"></i>
+                                <span class="badge badge-success">5</span>
+                            </a>
+
+                            <ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
+                                <li class="dropdown-header">
+                                    <i class="ace-icon fa fa-envelope-o"></i>
+                                    5 Messages
+                                </li>
+
+                                <li class="dropdown-content">
+                                    <ul class="dropdown-menu dropdown-navbar">
+                                        <li>
+                                            <a href="#" class="clearfix">
+                                                <img src="{% static 'image/avatars/avatar.png'%}" class="msg-photo"
+                                                    alt="Alex's Avatar" />
+                                                <span class="msg-body">
+                                                    <span class="msg-title">
+                                                        <span class="blue">Alex:</span>
+                                                        Ciao sociis natoque penatibus et auctor ...
+                                                    </span>
+
+                                                    <span class="msg-time">
+                                                        <i class="ace-icon fa fa-clock-o"></i>
+                                                        <span>a moment ago</span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="#" class="clearfix">
+                                                <img src="{% static 'image/avatars/avatar3.png'%}" class="msg-photo"
+                                                    alt="Susan's Avatar" />
+                                                <span class="msg-body">
+                                                    <span class="msg-title">
+                                                        <span class="blue">Susan:</span>
+                                                        Vestibulum id ligula porta felis euismod ...
+                                                    </span>
+
+                                                    <span class="msg-time">
+                                                        <i class="ace-icon fa fa-clock-o"></i>
+                                                        <span>20 minutes ago</span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="#" class="clearfix">
+                                                <img src="{% static 'image/avatars/avatar4.png'%}" class="msg-photo"
+                                                    alt="Bob's Avatar" />
+                                                <span class="msg-body">
+                                                    <span class="msg-title">
+                                                        <span class="blue">Bob:</span>
+                                                        Nullam quis risus eget urna mollis ornare ...
+                                                    </span>
+
+                                                    <span class="msg-time">
+                                                        <i class="ace-icon fa fa-clock-o"></i>
+                                                        <span>3:15 pm</span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="#" class="clearfix">
+                                                <img src="{% static 'image/avatars/avatar2.png'%}" class="msg-photo"
+                                                    alt="Kate's Avatar" />
+                                                <span class="msg-body">
+                                                    <span class="msg-title">
+                                                        <span class="blue">Kate:</span>
+                                                        Ciao sociis natoque eget urna mollis ornare ...
+                                                    </span>
+
+                                                    <span class="msg-time">
+                                                        <i class="ace-icon fa fa-clock-o"></i>
+                                                        <span>1:33 pm</span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="#" class="clearfix">
+                                                <img src="{% static 'image/avatars/avatar5.png'%}" class="msg-photo"
+                                                    alt="Fred's Avatar" />
+                                                <span class="msg-body">
+                                                    <span class="msg-title">
+                                                        <span class="blue">Fred:</span>
+                                                        Vestibulum id penatibus et auctor ...
+                                                    </span>
+
+                                                    <span class="msg-time">
+                                                        <i class="ace-icon fa fa-clock-o"></i>
+                                                        <span>10:09 am</span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li class="dropdown-footer">
+                                    <a href="inbox.html">
+                                        See all messages
+                                        <i class="ace-icon fa fa-arrow-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="light-blue dropdown-modal">
+                            <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                                <img class="nav-user-photo" src="{% static 'image/avatars/user.jpg'%}"
+                                    alt="Jason's Photo" />
+                                <span class="user-info">
+                                    <small>Welcome,</small>
+                                    Jason
+                                </span>
+
+                                <i class="ace-icon fa fa-caret-down"></i>
+                            </a>
+
+                            <ul
+                                class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                                <li>
+                                    <a href="#">
+                                        <i class="ace-icon fa fa-cog"></i>
+                                        Settings
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="profile.html">
+                                        <i class="ace-icon fa fa-user"></i>
+                                        Profile
+                                    </a>
+                                </li>
+
+                                <li class="divider"></li>
+
+                                <li>
+                                    <a href="#">
+                                        <i class="ace-icon fa fa-power-off"></i>
+                                        Logout
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>
 
-    <div class="main-container" id="main-container">
+    <div class="main-container ace-save-state" id="main-container">
+        <script type="text/javascript">
+            try { ace.settings.loadState('main-container') } catch (e) { }
+        </script>
         <div class="main-container-inner">
+            <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="ace-icon fa fa-home home-icon"></i>
+                        <a href="#">Home</a>
+                    </li>
+                    <li class="active">{% block breadcrumb %}{% endblock %}</li>
+                </ul><!-- /.breadcrumb -->
+
+                <div class="nav-search" id="nav-search">
+                    <form class="form-search">
+                        <span class="input-icon">
+                            <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input"
+                                autocomplete="off" />
+                            <i class="ace-icon fa fa-search nav-search-icon"></i>
+                        </span>
+                    </form>
+                </div><!-- /.nav-search -->
+            </div>
             <div class="main-content">
                 <div class="page-content">
-                    <br /><br />
-
-                    <div class="page-header">
-                        <ol id="breadcrumb" class="breadcrumb">
-                            <li id="home"><a href="/stocks/main.html">主页</a></li>
-                            {% block breadcrumb %}{% endblock %}
-                        </ol>
-                    </div>
                     <div class="row">
                         <div class="col-xs-12">
                             {% block maincontent %}{% endblock %}
