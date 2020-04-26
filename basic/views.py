@@ -3,6 +3,8 @@ from django.views.generic import ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.urls import reverse_lazy
 
+from config.settings import ITEMS_PER_PAGE
+
 from basic.models import Wordbook, Category, Warehouse
 from basic.forms import WordbookForm, CategoryForm, WarehouseForm
 
@@ -28,6 +30,7 @@ class CategoryDelete(DeleteView):
 
 class WordbookList(ListView):
     model = Wordbook
+    paginate_by = ITEMS_PER_PAGE
 
 
 class WordbookCreate(CreateView):
