@@ -5,8 +5,6 @@
 <head>
     <meta charset="utf-8">
     {% load bootstrap3 %}
-    {% bootstrap_css %}
-    {% bootstrap_javascript %}
     {% bootstrap_messages %}
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,11 +20,7 @@
     <meta name="keywords" content="库存管理,Bootstrap" />
     <meta name="description" content="使用django+bootstrap技术开发的库存管理系统" />
     <!-- basic styles -->
-<<<<<<< HEAD
     {% include "css.html "%}
-=======
-
->>>>>>> eea3f973a631b84a1a427359c75b52c7ba0f2d33
 </head>
 
 <body class="no-skin">
@@ -516,18 +510,9 @@
     {% block devicemodel %}{% endblock %}
     {% block brokentype %}{% endblock %}
     {% block subunit %}{% endblock %}
-    <script type="text/javascript">
-        if ("ontouchend" in document) document.write(
-            "<script src='{% static 'scripts/assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
-    </script>
-    <script src="{% static 'js/jquery-2.1.4.min.js'%}"></script>
-    <script src="{% static 'js/bootstrap.min.js'%}"></script>
-    <!-- <script src="{% static 'js/star-rating.min.js'%}"></script>
-    <script src="{% static 'js/typeahead-bs2.min.js'%}"></script>
-    <script src="{% static 'js/Chart.min.js'%}"></script> -->
-    <!-- ace scripts -->
-    <script src="{% static 'js/ace-elements.min.js'%}"></script>
-    <script src="{% static 'js/ace.min.js'%}"></script>
+
+    {% include "javascript.html" %}
+
     {% block script %}{% endblock %}
 </body>
 
