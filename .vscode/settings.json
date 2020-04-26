@@ -1,0 +1,11 @@
+{
+    "python.pythonPath": "C:\\Program Files\\Python37\\python.exe",
+    "python.formatting.provider": "yapf",
+    "python.formatting.yapfArgs": [
+        "--max-line-length=120"
+    ],
+    "editor.fontSize": 18,
+    "editor.formatOnPaste": true,
+    "editor.formatOnType": true,
+    "editor.formatOnSave": true
+}
