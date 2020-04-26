@@ -132,3 +132,5 @@ MEDIA_URL = '/media/'
 MEDIA_DIRS = [
     MEDIA_ROOT,
 ]
+
+ITEMS_PER_PAGE = 3
