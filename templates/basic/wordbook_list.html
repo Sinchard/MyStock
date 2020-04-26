@@ -10,6 +10,7 @@
 
 {% block maincontent %}
 <div id="data" class="col-md-10 col-md-offset-1">
+	{% if object_list %}
 	<table id='dataTable' class='table table-bordered table-hover' cellspacing='0' width='100%'>
 		<thead>
 			<tr>
@@ -21,7 +22,6 @@
 				<th>操作</th>
 			</tr>
 		</thead>
-		{% if object_list %}
 		{% for w in object_list %}
 		<tr>
 			<th>{{ w.id }}</th>
@@ -46,11 +46,6 @@
 			</th>
 		</tr>
 		{% endfor %}
-		{% else %}
-		<tr>
-			<th><strong>There are no warehouses present.</strong></th>
-		</tr>
-		{% endif %}
 		<tfoot>
 			<tr>
 				<th>ID</th>
@@ -62,6 +57,13 @@
 			</tr>
 		</tfoot>
 	</table>
+	{% else %}
+	<tr>
+		<th><strong>There are no warehouses present.</strong></th>
+	</tr>
+	{% endif %}
+
+	{% include "paginate.html" %}
 </div>
 {% endblock %}
 
