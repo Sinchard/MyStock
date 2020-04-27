@@ -6,7 +6,8 @@ from asset.models import Device, Material
 class DeviceForm(ModelForm):
     class Meta:
         model = Device
-        exclude = []
+        fields = ['id', 'brand', 'model', 'sn', 'classification', 'model', 'value', 'asset', 'sap', 'status',
+                    'description']
 
 
 class MaterialForm(ModelForm):
