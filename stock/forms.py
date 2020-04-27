@@ -3,13 +3,13 @@ import datetime
 from django import forms
 from django.forms import TextInput, Textarea, Select
 
-from stock.models import DeviceIn, MaterialIn, Application, ApplicationDetail
+from stock.models import DeviceOperate, MaterialIn, Application, ApplicationDetail
 
 
-class DeviceInForm(forms.ModelForm):
+class DeviceOperateForm(forms.ModelForm):
     
     class Meta:
-        model = DeviceIn
+        model = DeviceOperate
         fields = ['employee', 'warehouse', 'description']
 
         #exclude = ['device','check', 'create_date', 'modify_date']

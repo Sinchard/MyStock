@@ -5,49 +5,21 @@ from asset.models import Device, Material
 from user.models import UserProfile
 
 
-class DeviceIn(CommonInfo):
-    device = models.ForeignKey(
-        Device,
-        on_delete=models.SET_NULL,
-        blank=True,
-        null=True,
+class DeviceOperate(CommonInfo):
+    operate_choice = (
+        (1, '入库'),
+        (2, '出库'),
     )
-    warehouse = models.ForeignKey(
-        Warehouse,
-        on_delete=models.SET_NULL,
-        blank=True,
-        null=True,
-    )
-    employee = models.ForeignKey(
-        UserProfile,
-        on_delete=models.SET_NULL,
-        blank=True,
-        null=True,
-    )
+    device = models.ForeignKey(Device, on_delete=models.SET_NULL, blank=True, null=True)
+    warehouse = models.ForeignKey(Warehouse, on_delete=models.SET_NULL, blank=True, null=True)
+    employee = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, blank=True, null=True)
+    operate = models.IntegerField(default=1, choices=operate_choice, verbose_name="操作")
 
     def get_absolute_url():
         return reverse('stock:edit_devicein', args=[str(self.id)])
 
     def __str__(self):
         return self.device.sn + ' ' + self.employee.name
-
-    def get_device_display(self):
-        if self.device:
-            return self.device.get_device_display()
-        else:
-            return ''
-
-    def get_warehouse_display(self):
-        if self.warehouse:
-            return self.warehouse.name
-        else:
-            return ''
-
-    def get_employee_display(self):
-        if self.employee:
-            return self.employee.name
-        else:
-            return ''
 
     class Meta:
         verbose_name = '设备入库表'

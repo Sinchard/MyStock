@@ -4,20 +4,20 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.urls import reverse_lazy
 
 from asset.forms import DeviceForm
-from stock.models import DeviceIn, MaterialIn, Application, ApplicationDetail
-from stock.forms import DeviceInForm, MaterialInForm, ApplicationForm, ApplicationDetailForm
+from stock.models import DeviceOperate, MaterialIn, Application, ApplicationDetail
+from stock.forms import DeviceOperateForm, MaterialInForm, ApplicationForm, ApplicationDetailForm
 
 
-class DeviceInList(ListView):
-    model = DeviceIn
+class DeviceOperateList(ListView):
+    model = DeviceOperate
 
 
-class DeviceInCreate(CreateView):
-    model = DeviceIn
-    form_class = DeviceInForm
+class DeviceOperateCreate(CreateView):
+    model = DeviceOperate
+    form_class = DeviceOperateForm
 
     def get_context_data(self, **kwargs):
-        context = super(DeviceInCreate, self).get_context_data(**kwargs)
+        context = super(DeviceOperateCreate, self).get_context_data(**kwargs)
         #处理数据库记录对应的表单
         if self.request.method == 'POST':
             deviceForm = DeviceForm(self.request.POST, prefix='deviceForm')
@@ -28,23 +28,23 @@ class DeviceInCreate(CreateView):
         return context
 
     def form_valid(self, form):
-	    #DeviceIn不能保存，因为对应的device还未保存，所以commit传为False
-        devicein = form.save(commit=False)
+	    #DeviceOperate不能保存，因为对应的device还未保存，所以commit传为False
+        DeviceOperate = form.save(commit=False)
 		#获取上面get_context_data方法中在POST里得到的表单
         context = self.get_context_data()		
         device = context['deviceForm'].save()
-        devicein.device=device
-        devicein.save()
+        DeviceOperate.device=device
+        DeviceOperate.save()
         
-        return super(DeviceInCreate, self).form_valid(form)
+        return super(DeviceOperateCreate, self).form_valid(form)
 
 
-class DeviceInUpdate(UpdateView):
-    model = DeviceIn
-    form_class = DeviceInForm
+class DeviceOperateUpdate(UpdateView):
+    model = DeviceOperate
+    form_class = DeviceOperateForm
 
     def get_context_data(self, **kwargs):
-        context = super(DeviceInCreate, self).get_context_data(**kwargs)
+        context = super(DeviceOperateCreate, self).get_context_data(**kwargs)
         #处理数据库记录对应的表单
         if self.request.method == 'POST':
             deviceForm = DeviceForm(self.request.POST, prefix='deviceForm')
@@ -55,20 +55,20 @@ class DeviceInUpdate(UpdateView):
         return context
 
     def form_valid(self, form):
-	    #DeviceIn不能保存，因为对应的device还未保存，所以commit传为False
-        devicein = form.save(commit=False)
+	    #DeviceOperate不能保存，因为对应的device还未保存，所以commit传为False
+        DeviceOperate = form.save(commit=False)
 		#获取上面get_context_data方法中在POST里得到的表单
         context = self.get_context_data()		
         device = context['deviceForm'].save()
-        devicein.device=device
-        devicein.save()
+        DeviceOperate.device=device
+        DeviceOperate.save()
         
-        return super(DeviceInCreate, self).form_valid(form)
+        return super(DeviceOperateCreate, self).form_valid(form)
 
 
-class DeviceInDelete(DeleteView):
-    model = DeviceIn
-    success_url = reverse_lazy('stock:deviceins')
+class DeviceOperateDelete(DeleteView):
+    model = DeviceOperate
+    success_url = reverse_lazy('stock:DeviceOperates')
 
 
 class MaterialInList(ListView):

@@ -1,10 +1,10 @@
 from django.contrib import admin
 
-from stock.models import DeviceIn, MaterialIn, Application, ApplicationDetail
+from stock.models import DeviceOperate, MaterialIn, Application, ApplicationDetail
 
 
-@admin.register(DeviceIn)
-class DeviceInAdmin(admin.ModelAdmin):
+@admin.register(DeviceOperate)
+class DeviceOperateAdmin(admin.ModelAdmin):
     list_display = ('id', 'device', 'warehouse', 'employee', 'check', 'create_date',
                     'modify_date', 'description', 'attach')
     # 文章列表里显示想要显示的字段
