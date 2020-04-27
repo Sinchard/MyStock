@@ -39,7 +39,8 @@ class DeviceOperateCreate(CreateView):
             deviceForm = DeviceForm(prefix='deviceForm')
         #注意要把自己处理的表单放到context上下文中，供模板文件使用
         context['deviceForm'] = deviceForm
-        context['operate']=self.kwargs["operate"]
+        context['operate'] = self.kwargs["operate"]
+        context['new']=1
         return context
 
     def form_valid(self, form):
