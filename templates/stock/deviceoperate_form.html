@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% load myfilters %}
+{% load bootstrap3 %}
 
 {% block title %}
 新增设备入库
@@ -18,28 +18,35 @@
 {% endblock %}
 
 {% block maincontent %}
-<form id="warehouseForm" class="form-horizontal container" method="post" action="#">
+<form id="warehouseForm" role="form" class="form-horizontal container" method="post" action="#">
     {% csrf_token %}
 
-    {% for field in deviceForm %}
-    <div class="fieldWrapper">
-        {{ field.errors }}
-        {{ field.label_tag }}{{ field }}
-        {% if field.help_text %}
-        <p class="help">{{ field.help_text|safe }}</p>
-        {% endif %}
+    <div class="widget-box">
+        <div class="widget-header">
+            <h4 class="widget-title">入库信息</h4>
+            <div class="widget-toolbar">
+                <a href="#" data-action="collapse">
+                    <i class="ace-icon fa fa-chevron-up"></i>
+                </a>
+                <a href="#" data-action="close">
+                    <i class="ace-icon fa fa-times"></i>
+                </a>
+            </div>
+        </div>
+        <div class="widget-body">
+            <div class="widget-main">
+                {% for field in form %}
+                <div class="fieldWrapper">
+                    {{ field.errors }}
+                    {{ field.label_tag }} {{ field }}
+                    {% if field.help_text %}
+                    <p class="help">{{ field.help_text|safe }}</p>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
-    {% endfor %}
-
-    {% for field in form %}
-    <div class="fieldWrapper">
-        {{ field.errors }}
-        {{ field.label_tag }} {{ field }}
-        {% if field.help_text %}
-        <p class="help">{{ field.help_text|safe }}</p>
-        {% endif %}
-    </div>
-    {% endfor %}
 
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-11">
