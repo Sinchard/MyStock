@@ -3,11 +3,18 @@
 {% load myfilters %}
 
 {% block title %}
-库房详情
+新增设备入库
 {% endblock %}
 
 {% block breadcrumb %}
 <li id="orbit"><a href="{%url 'stock:deviceins' %}">设备入库列表</a></li>
+<li id="orbit" class="active">
+    {% if new %}
+    新增设备入库
+    {% else %}
+    设备入库更新
+    {% endif %}
+</li>
 {% endblock %}
 
 {% block maincontent %}
