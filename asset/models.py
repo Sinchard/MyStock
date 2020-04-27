@@ -17,7 +17,7 @@ class Device(CommonInfo):
                               on_delete=models.SET_NULL,
                               related_name='device_brands',
                               null=True,
-                              verbose_name="名称")
+                              verbose_name="品牌")
     model = models.ForeignKey(Wordbook,
                               blank=True,
                               on_delete=models.SET_NULL,
