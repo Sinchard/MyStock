@@ -3,6 +3,8 @@ from django.views.generic import ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.urls import reverse_lazy
 
+from config.settings import ITEMS_PER_PAGE
+
 from asset.forms import DeviceForm
 from stock.models import DeviceOperate, MaterialIn, Application, ApplicationDetail
 from stock.forms import DeviceOperateForm, MaterialInForm, ApplicationForm, ApplicationDetailForm
@@ -10,7 +12,19 @@ from stock.forms import DeviceOperateForm, MaterialInForm, ApplicationForm, Appl
 
 class DeviceOperateList(ListView):
     model = DeviceOperate
+    paginate_by = ITEMS_PER_PAGE
 
+    def get_queryset(self):
+        if self.kwargs["operate"] == 1 or self.kwargs["operate"] == 2:
+            return DeviceOperate.objects.filter(operate=self.kwargs["operate"])
+        else:            
+            return DeviceOperate.objects.all()
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(DeviceOperateList, self).get_context_data(**kwargs)
+        context['theurl'] = reverse_lazy("basic:wordbooks")
+        context['operate']=self.kwargs["operate"]
+        return context    
 
 class DeviceOperateCreate(CreateView):
     model = DeviceOperate
@@ -25,16 +39,21 @@ class DeviceOperateCreate(CreateView):
             deviceForm = DeviceForm(prefix='deviceForm')
         #注意要把自己处理的表单放到context上下文中，供模板文件使用
         context['deviceForm'] = deviceForm
+        context['operate']=self.kwargs["operate"]
         return context
 
     def form_valid(self, form):
 	    #DeviceOperate不能保存，因为对应的device还未保存，所以commit传为False
-        DeviceOperate = form.save(commit=False)
+        deviceop = form.save(commit=False)
 		#获取上面get_context_data方法中在POST里得到的表单
         context = self.get_context_data()		
         device = context['deviceForm'].save()
-        DeviceOperate.device=device
-        DeviceOperate.save()
+        deviceop.device = device
+        if self.kwargs["operate"] == 1 or self.kwargs["operate"] == 2:
+            deviceop.operate = self.kwargs["operate"]
+        else:
+            deviceop.operate = 0
+        deviceop.save()
         
         return super(DeviceOperateCreate, self).form_valid(form)
 
