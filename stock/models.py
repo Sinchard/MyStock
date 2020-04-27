@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 from basic.models import CommonInfo, Warehouse
 from asset.models import Device, Material
@@ -14,8 +15,9 @@ class DeviceOperate(CommonInfo):
     warehouse = models.ForeignKey(Warehouse, on_delete=models.SET_NULL, blank=True, null=True)
     employee = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, blank=True, null=True)
     operate = models.IntegerField(default=1, choices=operate_choice, verbose_name="操作")
+    location = models.CharField(max_length=50, blank=True,null=True, verbose_name="安装地点")
 
-    def get_absolute_url():
+    def get_absolute_url(self):
         return reverse('stock:edit_devicein', args=[str(self.id)])
 
     def __str__(self):
