@@ -11,9 +11,9 @@ class DeviceOperate(CommonInfo):
         (1, '入库'),
         (2, '出库'),
     )
-    device = models.ForeignKey(Device, on_delete=models.SET_NULL, blank=True, null=True)
-    warehouse = models.ForeignKey(Warehouse, on_delete=models.SET_NULL, blank=True, null=True)
-    employee = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, blank=True, null=True)
+    device = models.ForeignKey(Device, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="设备")
+    warehouse = models.ForeignKey(Warehouse, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="所在仓库")
+    employee = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="入库人")
     operate = models.IntegerField(default=1, choices=operate_choice, verbose_name="操作")
     location = models.CharField(max_length=50, blank=True,null=True, verbose_name="安装地点")
 
