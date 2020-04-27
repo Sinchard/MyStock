@@ -55,17 +55,29 @@
                             <b class="arrow icon-angle-down"></b>
                         </a>
                         <ul class="dropdown-menu">
+                            <li id="wordbooksInfo">
+                                <a href="{%url 'basic:wordbooks' %}"> <i class="icon-double-angle-right"></i> 词条信息 </a>
+                            </li>
                             <li id="warehousesInfo">
-                                <a href="/stocks/warehouse.html"> <i class="icon-double-angle-right"></i> 库房信息 </a>
+                                <a href="{%url 'basic:warehouses' %}"> <i class="icon-double-angle-right"></i> 库房信息 </a>
                             </li>
                             <li id="employeesInfo">
-                                <a href="/stocks/employee.html"> <i class="icon-double-angle-right"></i> 员工信息 </a>
+                                <a href="{%url 'user:profiles' %}"> <i class="icon-double-angle-right"></i> 员工信息 </a>
                             </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" id="basicInfo" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                            aria-haspopup="true" aria-expanded="false">
+                            <i class="icon-bullhorn"></i> <span class="menu-text"> 设备材料 </span>
+                            <b class="arrow icon-angle-down"></b>
+                        </a>
+                        <ul class="dropdown-menu">
                             <li id="devicesInfo">
-                                <a href="/stocks/device.html"> <i class="icon-double-angle-right"></i> 设备信息 </a>
+                                <a href="{%url 'asset:devices' %}"> <i class="icon-double-angle-right"></i> 设备信息 </a>
                             </li>
                             <li id="meterialsInfo">
-                                <a href="/meterial/meterial.html"> <i class="icon-double-angle-right"></i> 材料信息 </a>
+                                <a href="{%url 'asset:materials' %}"> <i class="icon-double-angle-right"></i> 材料信息 </a>
                             </li>
                         </ul>
                     </li>
