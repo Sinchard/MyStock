@@ -32,6 +32,11 @@ class WordbookList(ListView):
     model = Wordbook
     paginate_by = ITEMS_PER_PAGE
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(WordbookList, self).get_context_data(**kwargs)
+        context['theurl'] = reverse_lazy("basic:wordbooks")
+        return context    
+
 
 class WordbookCreate(CreateView):
     model = Wordbook
@@ -50,6 +55,7 @@ class WordbookDelete(DeleteView):
 
 class WarehouseList(ListView):
     model = Warehouse
+    paginate_by = ITEMS_PER_PAGE
 
 
 class WarehouseCreate(CreateView):
