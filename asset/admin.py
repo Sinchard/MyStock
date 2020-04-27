@@ -5,7 +5,7 @@ from asset.models import Device, Material
 
 @admin.register(Device)
 class DeviceAdmin(admin.ModelAdmin):
-    list_display = ('id', 'brand', 'model', 'sn', 'classification', 'model', 'value', 'asset', 'sap', 'status', 'warehouse', 'location', 'create_date', 'modify_date',
+    list_display = ('id', 'brand', 'model', 'sn', 'classification', 'model', 'value', 'asset', 'sap', 'status', 'create_date', 'modify_date',
                     'description', 'attach')
     # 文章列表里显示想要显示的字段
     list_per_page = 50

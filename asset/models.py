@@ -49,15 +49,7 @@ class Device(CommonInfo):
     status = models.IntegerField(default=1,
                                  choices=status_choice,
                                  verbose_name="状态")
-    warehouse = models.ForeignKey(Warehouse,
-                                  on_delete=models.SET_NULL,
-                                  blank=True,
-                                  null=True,
-                                  verbose_name="所在库房")
-    location = models.CharField(max_length=50,
-                                blank=True,
-                                null=True,
-                                verbose_name="位置")
+
 
     def __str__(self):
         return self.brand.name + '/' + self.model.name + '/' + self.sn  # + ' ' + self.category.name
@@ -76,30 +68,6 @@ class Device(CommonInfo):
             'label': self.name.name + '/' + self.model.name + '/' + self.sn,
             'value': self.id
         }
-
-    def dict(self):
-        if self.warehouse is None:
-            self.warehouse = Warehouse(id=0, name='')
-
-        d = {
-            'id': self.id,
-            'sn': self.sn,
-            'name': self.name.name,
-            'nameId': self.name.id,
-            'model': self.model.name,
-            'modelId': self.model.id,
-            'type': self.type.name,
-            'typeId': self.type.id,
-            'good': str(self.good),
-            'asset': self.asset,
-            'sap': self.sap,
-            'status': self.status,
-            'warehouse': self.warehouse.name,
-            'warehouseId': self.warehouse.id,
-            'location': self.location
-        }
-        d.update(super(Device, self).dict())
-        return d
 
     def get_absolute_url(self):
         return reverse('asset:edit_device', args=[str(self.id)])
