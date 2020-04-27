@@ -10,8 +10,7 @@ class DeviceOperateForm(forms.ModelForm):
     
     class Meta:
         model = DeviceOperate
-        fields = ['employee', 'warehouse', 'description']
-
+        fields = ['id', 'device','employee', 'warehouse', 'description']
         #exclude = ['device','check', 'create_date', 'modify_date']
     
 
