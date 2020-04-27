@@ -6,16 +6,16 @@ app_name = 'stock'
 
 urlpatterns = [
     # display all device in and out records
-    path('DeviceOperates', DeviceOperateList.as_view(), name='DeviceOperates'),
-    path('DeviceOperate/<int:pk>/delete', DeviceOperateDelete.as_view(), name='delete_DeviceOperate'),
+    path('deviceoperates', DeviceOperateList.as_view(), name='deviceoperates'),
+    path('deviceoperate/<int:pk>/delete', DeviceOperateDelete.as_view(), name='delete_deviceoperate'),
     # device in operate
-    path('DeviceIns', DeviceOperateList.as_view(), {'operate': 1}, name='DeviceIns'),
-    path('DeviceIn/add', DeviceOperateCreate.as_view(), {'operate': 1}, name='add_DeviceIn'),
-    path('DeviceIn/<int:pk>/', DeviceOperateUpdate.as_view(), {'operate': 1}, name='edit_DeviceIn'),
+    path('deviceins', DeviceOperateList.as_view(), {'operate': 1}, name='deviceins'),
+    path('devicein/add', DeviceOperateCreate.as_view(), {'operate': 1}, name='add_devicein'),
+    path('devicein/<int:pk>/', DeviceOperateUpdate.as_view(), {'operate': 1}, name='edit_devicein'),
     # device out operate
-    path('DeviceOuts', DeviceOperateList.as_view(), {'operate': 2}, name='DeviceOuts'),
-    path('DeviceOut/add', DeviceOperateCreate.as_view(), {'operate': 2}, name='add_DeviceOut'),
-    path('DeviceOut/<int:pk>/', DeviceOperateUpdate.as_view(), {'operate': 2}, name='edit_DeviceOut'),
+    path('deviceouts', DeviceOperateList.as_view(), {'operate': 2}, name='deviceouts'),
+    path('deviceout/add', DeviceOperateCreate.as_view(), {'operate': 2}, name='add_deviceout'),
+    path('deviceout/<int:pk>/', DeviceOperateUpdate.as_view(), {'operate': 2}, name='edit_deviceout'),
 
     path('applications', ApplicationList.as_view(), name='applications'),
     path('application/add', ApplicationCreate.as_view(), name='add_application'),
