@@ -32,24 +32,13 @@ class DeviceOperateCreate(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super(DeviceOperateCreate, self).get_context_data(**kwargs)
-        #处理数据库记录对应的表单
-        if self.request.method == 'POST':
-            deviceForm = DeviceForm(self.request.POST, prefix='deviceForm')
-        else:
-            deviceForm = DeviceForm(prefix='deviceForm')
-        #注意要把自己处理的表单放到context上下文中，供模板文件使用
-        context['deviceForm'] = deviceForm
         context['operate'] = self.kwargs["operate"]
         context['new']=1
         return context
 
     def form_valid(self, form):
-	    #DeviceOperate不能保存，因为对应的device还未保存，所以commit传为False
         deviceop = form.save(commit=False)
-		#获取上面get_context_data方法中在POST里得到的表单
-        context = self.get_context_data()		
-        device = context['deviceForm'].save()
-        deviceop.device = device
+        deviceop.location = ""
         if self.kwargs["operate"] == 1 or self.kwargs["operate"] == 2:
             deviceop.operate = self.kwargs["operate"]
         else:
@@ -63,27 +52,6 @@ class DeviceOperateUpdate(UpdateView):
     model = DeviceOperate
     form_class = DeviceOperateForm
 
-    def get_context_data(self, **kwargs):
-        context = super(DeviceOperateCreate, self).get_context_data(**kwargs)
-        #处理数据库记录对应的表单
-        if self.request.method == 'POST':
-            deviceForm = DeviceForm(self.request.POST, prefix='deviceForm')
-        else:
-            deviceForm = DeviceForm(prefix='deviceForm')
-        #注意要把自己处理的表单放到context上下文中，供模板文件使用
-        context['deviceForm'] = deviceForm
-        return context
-
-    def form_valid(self, form):
-	    #DeviceOperate不能保存，因为对应的device还未保存，所以commit传为False
-        DeviceOperate = form.save(commit=False)
-		#获取上面get_context_data方法中在POST里得到的表单
-        context = self.get_context_data()		
-        device = context['deviceForm'].save()
-        DeviceOperate.device=device
-        DeviceOperate.save()
-        
-        return super(DeviceOperateCreate, self).form_valid(form)
 
 
 class DeviceOperateDelete(DeleteView):
