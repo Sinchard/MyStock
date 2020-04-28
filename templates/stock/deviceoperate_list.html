@@ -5,11 +5,12 @@
 {% endblock %}
 
 {% block breadcrumb %}
-<li id="orbit"><a href="{%url 'basic:wordbooks' %}">字典列表</a></li>
+<li id="orbit"><a href="{%url 'stock:deviceins' %}">设备入库列表</a></li>
 {% endblock %}
 
 {% block maincontent %}
 <div id="data" class="col-md-10 col-md-offset-1">
+	{% if object_list %}
 	<table id='dataTable' class='table table-bordered table-hover' cellspacing='0' width='100%'>
 		<thead>
 			<tr>
@@ -21,7 +22,6 @@
 				<th>操作</th>
 			</tr>
 		</thead>
-		{% if object_list %}
 		{% for d in object_list %}
 		<tr>
 			<th>{{ d.id }}</th>
@@ -31,23 +31,22 @@
 			<th>{{ d.description }}</th>
 			<th>
 				<div class="hidden-sm hidden-xs btn-group">
-					<a class="btn btn-xs btn-info" href="{% url 'asset:edit_device' d.id %}">
+					<a class="btn btn-xs btn-info" href="{% url 'stock:edit_devicein' d.id %}">
 						<i class="ace-icon fa fa-pencil bigger-120"></i>
 					</a>
 
-					<a class="btn btn-xs btn-danger" href="{% url 'asset:delete_device' d.id %}">
+					<a class="btn btn-xs btn-danger" href="{% url 'stock:delete_deviceoperate' d.id %}">
 						<i class="ace-icon fa fa-trash-o bigger-120"></i>
 					</a>
 				</div>
 			</th>
 		</tr>
 		{% endfor %}
-		{% else %}
-		<tr>
-			<th><strong>There are no devices present.</strong></th>
-		</tr>
-		{% endif %}
 	</table>
+	{% else %}
+	<strong>There are no device stockin present.</strong>
+	{% endif %}
+
 </div>
 {% endblock %}
 
