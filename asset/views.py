@@ -3,9 +3,23 @@ from django.views.generic import ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.urls import reverse_lazy
 
+from dal import autocomplete
+
 from asset.models import Device, Material
 from asset.forms import DeviceForm, MaterialForm
 
+class DeviceAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        # Don't forget to filter out results depending on the visitor !
+        # if not self.request.user.is_authenticated():
+        #     return Country.objects.none()
+
+        qs = Device.objects.all()
+
+        if self.q:
+            qs = qs.filter(sn__icontains=self.q)
+
+        return qs
 
 class DeviceList(ListView):
     model = Device
