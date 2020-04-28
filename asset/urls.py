@@ -6,7 +6,7 @@ from asset.views import MaterialList, MaterialCreate, MaterialUpdate, MaterialDe
 app_name = 'asset'
 
 urlpatterns = [
-     path('device-autocomplete/', DeviceAutocomplete.as_view(), name='device-autocomplete'),
+    path('device-autocomplete/', DeviceAutocomplete.as_view(), name='device-autocomplete'),
     path('devices', DeviceList.as_view(), name='devices'),
     path('device/add', DeviceCreate.as_view(), name='add_device'),
     path('device/<int:pk>/', DeviceUpdate.as_view(), name='edit_device'),

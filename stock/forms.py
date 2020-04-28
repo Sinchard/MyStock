@@ -3,16 +3,29 @@ import datetime
 from django import forms
 from django.forms import TextInput, Textarea, Select
 
+from dal import autocomplete
+
+from asset.models import Device
 from stock.models import DeviceOperate, MaterialIn, Application, ApplicationDetail
 
-
 class DeviceOperateForm(forms.ModelForm):
-    
+    id = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
+    description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': '2'}), required=False)
+
     class Meta:
         model = DeviceOperate
-        fields = ['id', 'device','employee', 'warehouse', 'description']
-        #exclude = ['device','check', 'create_date', 'modify_date']
-    
+        fields = ['id', 'device', 'warehouse', 'employee', 'description']
+        widgets = {
+            'device': autocomplete.ModelSelect2(
+                            url='asset:device-autocomplete',
+                            attrs={'class': 'form-control'}
+                        ),
+            'warehouse': Select(attrs={'class': 'form-control'}),
+            'employee': autocomplete.ModelSelect2(
+                            url='user:employee-autocomplete',
+                            attrs={'class': 'form-control'}
+                        ),
+        }    
 
 class MaterialInForm(forms.ModelForm):
     class Meta:
