@@ -47,13 +47,14 @@
 		</tr>
 		{% endfor %}
 	</table>
+	{% include "paginate.html" %}
 	{% else %}
 	<tr>
 		<th><strong>There are no warehouses present.</strong></th>
 	</tr>
 	{% endif %}
 
-	{% include "paginate.html" %}
+
 </div>
 {% endblock %}
 
