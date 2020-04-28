@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block breadcrumb %}
+<li id="orbit" class="active"><a href="{%url 'stock:deviceins' %}">设备入库列表</a></li>
+{% endblock %}
+
+{% block maincontent %}
+<div id="data">
+    {% if object_list %}
+    <table id='dataTable' class='table table-bordered table-hover' cellspacing='0' width='100%'>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>名称</th>
+                <th>申请人</th>
+                <th>状态</th>
+                <th>申请时间</th>
+                <th>备注</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        {% for d in object_list %}
+        <tr>
+            <th>{{ d.id }}</th>
+            <th>{{ d.name }}</th>
+            <th>{{ d.applicant }}</th>
+            <th>{{ d.status }}</th>
+            <th>{{ d.created }}</th>
+            <th>{{ d.description }}</th>
+            <th>
+                <div class="hidden-sm hidden-xs btn-group">
+                    <a class="btn btn-xs btn-info" href="{% url 'stock:edit_application' d.id %}">
+                        <i class="ace-icon fa fa-pencil bigger-120"></i>
+                    </a>
+
+                    <a class="btn btn-xs btn-danger" href="{% url 'stock:delete_application' d.id %}">
+                        <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                    </a>
+                </div>
+            </th>
+        </tr>
+        {% endfor %}
+    </table>
+    {% include "paginate.html" %}
+    {% else %}
+    <strong>There are no applications present.</strong>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript" src="/static/scripts/mainInit/application.js"></script>
+{% endblock %}
