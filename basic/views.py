@@ -3,6 +3,8 @@ from django.views.generic import ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.urls import reverse_lazy
 
+from dal import autocomplete
+
 from config.settings import ITEMS_PER_PAGE
 
 from basic.models import Wordbook, Category, Warehouse
@@ -52,6 +54,18 @@ class WordbookDelete(DeleteView):
     model = Wordbook
     success_url = reverse_lazy('wordbooks')
 
+class WordbookAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        # Don't forget to filter out results depending on the visitor !
+        # if not self.request.user.is_authenticated():
+        #     return Country.objects.none()
+
+        qs = Wordbook.objects.all()
+
+        if self.q:
+            qs = qs.filter(sn__icontains=self.q)
+
+        return qs
 
 class WarehouseList(ListView):
     model = Warehouse
