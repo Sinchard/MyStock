@@ -12,7 +12,7 @@ def time2str(d):
 def str2time(s):
     try:
         d = datetime.datetime.strptime(s, '%Y-%m-%d %H:%M:%S')
-    except Exception, e:
+    except Exception:
         d = None
     finally:
         return d

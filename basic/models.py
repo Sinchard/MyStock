@@ -1,6 +1,8 @@
 from django.db import models
 from django.urls import reverse
 
+from basic.utils import time2str, str2time
+
 
 class CommonInfo(models.Model):
     check_choice = (
