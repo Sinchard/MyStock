@@ -1,7 +1,7 @@
 from django.urls import path
 from basic.views import CategoryList, CategoryCreate, CategoryUpdate, CategoryDelete
 
-from user.views import UserProfileList, UserProfileCreate, UserProfileUpdate, UserProfileDelete
+from user.views import UserProfileList, UserProfileCreate, UserProfileUpdate, UserProfileDelete, UserProfileAutocomplete
 
 app_name = 'user'
 
@@ -13,4 +13,5 @@ urlpatterns = [
     path('profile/<int:pk>/delete',
          UserProfileDelete.as_view(),
          name='delete_profile'),
+path('employee-autocomplete/', UserProfileAutocomplete.as_view(), name='employee-autocomplete'),
 ]
