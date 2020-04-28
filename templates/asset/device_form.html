@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block breadcrumb %}
 <li id="orbit"><a href="{%url 'asset:devices' %}">设备列表</a></li>
 {% endblock %}
@@ -29,15 +29,15 @@
                 <div class="form-group col-md-6">
                     {% endif %}
                     <label for="{{ form.classification.id_for_label }}"
-                        class="col-sm-3 control-label"><strong>设备类型：</strong></label>
-                    <div class="col-sm-8 input-group">
+                        class="col-md-3 control-label"><strong>设备类型：</strong></label>
+                    <div class="col-md-8 input-group">
                         {{ form.classification }}
-                        <span class="input-group-btn">
+                        <!-- <span class="input-group-btn">
                             <button class="btn btn-info btn-xs" type="button" data-toggle="modal"
                                 data-target="#addDeviceTypeModel">
                                 <span class="glyphicon glyphicon-plus"></span>新增
                             </button>
-                        </span>
+                        </span> -->
                     </div>
                     {% if form.classification.errors %}
                     <ul style="list-style-type:none">
@@ -56,15 +56,15 @@
                     <div class="form-group col-md-6">
                         {% endif %}
                         <label for="{{ form.brand.id_for_label }}"
-                            class="col-sm-3 control-label"><strong>品牌：</strong></label>
-                        <div class="col-sm-8 input-group">
+                            class="col-md-3 control-label"><strong>品牌：</strong></label>
+                        <div class="col-md-8 input-group form-group">
                             {{ form.brand }}
-                            <span class="input-group-btn">
+                            <!-- <span class="input-group-btn">
                                 <button class="btn btn-info btn-xs" type="button" data-toggle="modal"
                                     data-target="#addDeviceBrandModel">
                                     <span class="glyphicon glyphicon-plus"></span>新增
                                 </button>
-                            </span>
+                            </span> -->
                         </div>
                         {% if form.brand.errors %}
                         <ul style="list-style-type:none">
@@ -84,12 +84,12 @@
                                 class="col-sm-3 control-label"><strong>型号：</strong></label>
                             <div class="col-sm-8 input-group">
                                 {{ form.model }}
-                                <span class="input-group-btn">
+                                <!-- <span class="input-group-btn">
                                     <button class="btn btn-info btn-xs" type="button" data-toggle="modal"
                                         data-target="#addDeviceModelModel">
                                         <span class="glyphicon glyphicon-plus"></span>新增
                                     </button>
-                                </span>
+                                </span> -->
                             </div>
                             {% if form.model.errors %}
                             <ul style="list-style-type:none">
@@ -208,9 +208,9 @@
 
                                         <div class="row">
                                             {% if form.description.errors %}
-                                            <div class="form-group has-warning">
+                                            <div class="form-group has-warning col-md-6">
                                                 {% else %}
-                                                <div class="form-group ">
+                                                <div class="form-group col-md-6">
                                                     {% endif %}
                                                     <label for="{{ form.description.id_for_label }}"
                                                         class="col-sm-3 control-label">备注：</label>
@@ -245,3 +245,8 @@
     </form>
 </div>
 {% endblock maincontent%}
+
+{% block script %}
+<script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
+{{ form.media }}
+{% endblock %}
