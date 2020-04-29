@@ -7,6 +7,7 @@ from dal import autocomplete
 
 from asset.models import Device
 from stock.models import DeviceOperate, MaterialIn, Application, ApplicationDetail
+from django.forms.models import inlineformset_factory
 
 class DeviceOperateForm(forms.ModelForm):
     id = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
@@ -38,8 +39,10 @@ class ApplicationForm(forms.ModelForm):
         model = Application
         fields = ['id', 'name', 'applicant', 'status', 'approver', 'approve_content', 'approve_date',
                     'confirmed', 'confirm_content', 'confirm_date', 'description']
-                    
+
+DetailFormSet = inlineformset_factory(Application, ApplicationDetail, fields=('name', 'number', 'location', 'is_device', 'description'),
+                                          extra=10, can_delete=False, max_num=15)
 class ApplicationDetailForm(forms.ModelForm):
     class Meta:
         model = ApplicationDetail
-        fields = ['name', 'number', 'location', 'is_device']                    
+        fields = ['name', 'number', 'location', 'is_device', 'description']                    
