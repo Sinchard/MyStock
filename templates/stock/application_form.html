@@ -7,36 +7,134 @@
 {% endblock %}
 
 {% block breadcrumb %}
-<li id="orbit"><a href="{%url 'stock:deviceins' %}">设备入库列表</a></li>
+<li id="orbit"><a href="{%url 'stock:applications' %}">设备入库列表</a></li>
 {% endblock %}
 
 {% block maincontent %}
-<form id="warehouseForm" class="form-horizontal container" method="post" action="#">
+<form id="applicationForm" class="form-horizontal container" method="post" action="#">
     {% csrf_token %}
+    <!-- hidden fields -->
+    {% for hidden in form.hidden_fields %}
+    {{ hidden }}
+    {% endfor %}
+    {{ detailSets.management_form }}
 
-    {% bootstrap_form form layout="horizontal" %}
-
-    <div class="row">{% bootstrap_form detailForm0 layout="inline" %}</div>
-
-    {% bootstrap_form detailForm1 layout="inline" %}
-    {% bootstrap_form detailForm2 layout="inline" %}
-    {% bootstrap_form detailForm3 layout="inline" %}
-
-
-
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-11">
-            <button id="oper" type="submit" class="btn btn-primary">确认</button>
-            <button type="button" class="btn btn-default">取消</button>
+    <!-- application detail forms -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">设备材料申请</h3>
         </div>
+        <table class="table" align="center">
+            <tr>
+                <th>
+                    <h5><strong>设备描述</strong></h5>
+                </th>
+                <th>
+                    <h5><strong>设备数量(仅为数字)</strong></h5>
+                </th>
+                <th>
+                    <h5><strong>安装位置</strong></h5>
+                </th>
+            </tr>
+            {% for df in detailSets %}
+            {% for hidden in df.hidden_fields %}
+            {{ hidden }}
+            {% endfor %}
+            <tr>
+                {% if df.name.errors %}
+                <th class="has-warning">
+                    {% else %}
+                <th>
+                    {% endif %}
+                    {{ df.name }}
+                    {% if df.name.errors %}
+                    <ul style="list-style-type:none">
+                        {% for error in df.name.errors %}
+                        <li align="center" class="text-warning"><strong>{{ error }}</strong></li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </th>
+                {% if df.number.errors %}
+                <th class="has-warning">
+                    {% else %}
+                <th>
+                    {% endif %}
+                    {{ df.number }}
+                    {% if df.number.errors %}
+                    <ul style="list-style-type:none">
+                        {% for error in df.number.errors %}
+                        <li align="center" class="text-warning"><strong>{{ error }}</strong></li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </th>
+                {% if df.location.errors %}
+                <th class="has-warning">
+                    {% else %}
+                <th>
+                    {% endif %}
+                    {{ df.location }}
+                    {% if df.location.errors %}
+                    <ul style="list-style-type:none">
+                        {% for error in df.location.errors %}
+                        <li align="center" class="text-warning"><strong>{{ error }}</strong></li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </th>
+            </tr>
+            {% endfor %}
+        </table>
     </div>
-    {% if alert == 'T' %}
-    <div id="alert" class="alert alert-dismissable alert-success">库房信息添加成功！</div>
-    {% elif alert == 'F' %}
-    <div id="alert" class="alert alert-dismissable alert-warning">添加失败，稍后请重试</div>
-    {% else %}
-    <div id="alert"></div>
-    {% endif %}
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            {% if form.non_field_errors %}
+            <ul style="list-style-type:none">
+                {% for error in form.non_field_errors %}
+                <li align="center" class="text-warning">
+                    <h2>{{ error }}</h2>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+            <div class="row">
+                {% if form.applicant.errors %}
+                <div class="form-group col-md-6 has-warning">
+                    {% else %}
+                    <div class="form-group col-md-6">
+                        {% endif %}
+                        <label for="{{ form.applicant.id_for_label }}"
+                            class="col-sm-4 control-label"><strong>申请人：</strong></label>
+                        <div class="col-sm-8">
+                            {{ form.applicant }}
+                        </div>
+                        {% if form.applicant.errors %}
+                        <ul style="list-style-type:none">
+                            {% for error in form.applicant.errors %}
+                            <li align="center" class="text-warning"><strong>{{ error }}</strong></li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-11">
+                        <button id="oper" type="submit" class="btn btn-primary">确认</button>
+                        <button type="button" class="btn btn-default">取消</button>
+                    </div>
+                </div>
+                {% if alert == 'T' %}
+                <div id="alert" class="alert alert-dismissable alert-success">库房信息添加成功！</div>
+                {% elif alert == 'F' %}
+                <div id="alert" class="alert alert-dismissable alert-warning">添加失败，稍后请重试</div>
+                {% else %}
+                <div id="alert"></div>
+                {% endif %}
 </form>
 </div>
 {% endblock %}
