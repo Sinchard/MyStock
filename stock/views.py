@@ -110,7 +110,7 @@ class ApplicationCreate(CreateView):
         form_class = self.get_form_class()
         form = self.get_form(form_class)
         detailSets = DetailFormSet(self.request.POST)
-        if (form.is_valid() and detailSets.is_valid()):
+        if detailSets.is_valid():
             return self.form_valid(form, detailSets)
         else:
             return self.form_invalid(form, detailSets)
